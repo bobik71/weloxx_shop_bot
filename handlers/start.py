@@ -21,10 +21,11 @@ async def cmd_start(message: types.Message, state: FSMContext):
     text = (
         f"👋 Привет, {message.from_user.first_name}!\n\n"
         f"🛍️ <b>{config.BOT_NAME}</b>\n\n"
-        "🔹 Telegram аккаунты\n"
+        "📱 <b>Telegram аккаунты</b>\n"
         "🔹 Мгновенная выдача\n"
-        "🔹 Гарантия 24 часа\n\n"
-        "Выберите действие:"
+        "🔹 Гарантия 24 часа\n"
+        "🔹 Поддержка 24/7\n\n"
+        "Нажмите «📱 Каталог» для просмотра:"
     )
     
     await message.answer(

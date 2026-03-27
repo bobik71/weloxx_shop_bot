@@ -31,7 +31,7 @@ async def start_buy(callback: types.CallbackQuery, state: FSMContext):
     # Создаём счёт
     invoice_data = await payment.create_invoice(
         amount=price,
-        description=f"Покупка: {item_info.get('title', 'Telegram аккаунт')}",
+        description=f"📱 Telegram аккаунт: {item_info.get('title', 'N/A')}",
         payload=f"{item_id}_{callback.from_user.id}"
     )
     
@@ -52,7 +52,7 @@ async def start_buy(callback: types.CallbackQuery, state: FSMContext):
     
     await callback.message.edit_text(
         f"💳 <b>Оплата</b>\n\n"
-        f"Товар: {item_info.get('title', 'Telegram аккаунт')}\n"
+        f"Товар: 📱 {item_info.get('title', 'Telegram аккаунт')}\n"
         f"Сумма: <b>{price}₽</b>\n\n"
         f"Нажмите кнопку для оплаты:",
         reply_markup=types.InlineKeyboardMarkup(inline_keyboard=[
@@ -94,7 +94,7 @@ async def check_payment(callback: types.CallbackQuery, state: FSMContext):
         return
     
     # Оплата подтверждена — покупаем на lzt
-    await callback.message.edit_text("🛒 Покупаем аккаунт на lzt.market...")
+    await callback.message.edit_text("🛒 Покупаем аккаунт...")
     
     lzt_price = item_info.get("price", price * 0.8)
     buy_result = await lzt.buy_account(item_id, lzt_price)
@@ -135,3 +135,16 @@ async def check_payment(callback: types.CallbackQuery, state: FSMContext):
     )
     
     await state.clear()
+
+# 🔹 Заглушки для будущих команд
+@router.callback_query(F.data == "orders")
+async def show_orders(callback: types.CallbackQuery):
+    await callback.answer("📚 История покупок скоро будет!", show_alert=True)
+
+@router.callback_query(F.data == "help")
+async def show_help(callback: types.CallbackQuery):
+    await callback.answer(
+        f"📞 Поддержка: {config.SUPPORT_CHAT}\n"
+        f"⏱️ Гарантия: 24 часа",
+        show_alert=True
+    )
