@@ -21,11 +21,11 @@ async def cmd_start(message: types.Message, state: FSMContext):
     text = (
         f"👋 Привет, {message.from_user.first_name}!\n\n"
         f"🛍️ <b>{config.BOT_NAME}</b>\n\n"
-        "📱 <b>Telegram аккаунты</b>\n"
-        "🔹 Мгновенная выдача\n"
-        "🔹 Гарантия 24 часа\n"
-        "🔹 Поддержка 24/7\n\n"
-        "Нажмите «📱 Каталог» для просмотра:"
+        f"📱 <b>Telegram аккаунты разных стран</b>\n\n"
+        f"🔹 Мгновенная выдача\n"
+        f"🔹 Гарантия 24 часа\n"
+        f"🔹 Поддержка 24/7\n\n"
+        f"Нажмите «📱 Купить аккаунт»:"
     )
     
     await message.answer(
@@ -42,3 +42,16 @@ async def back_to_main(callback: types.CallbackQuery, state: FSMContext):
         reply_markup=main_menu()
     )
     await callback.answer()
+
+@router.callback_query(F.data == "orders")
+async def show_orders(callback: types.CallbackQuery):
+    await callback.answer("📚 История покупок скоро будет!", show_alert=True)
+
+@router.callback_query(F.data == "help")
+async def show_help(callback: types.CallbackQuery):
+    await callback.answer(
+        f"📞 Поддержка: {config.SUPPORT_CHAT}\n"
+        f"⏱️ Гарантия: 24 часа\n"
+        f"💳 Оплата: CryptoBot",
+        show_alert=True
+    )

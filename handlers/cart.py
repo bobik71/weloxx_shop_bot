@@ -18,21 +18,22 @@ class PaymentFSM(StatesGroup):
 async def start_buy(callback: types.CallbackQuery, state: FSMContext):
     data = callback.data.split("_")
     item_id = int(data[1])
-    price = float(data[2]) if len(data) > 2 else 0
+    price = float(data[2])
+    country_code = data[3] if len(data) > 3 else "US"
     
     state_data = await state.get_data()
-    items = state_data.get("items", {})
-    item_info = items.get(str(item_id), {})
+    item_info = state_data.get("item_info", {})
+    country_name = state_data.get("country_name", "Telegram")
     
-    if not item_info:
-        await callback.answer("⚠️ Товар не найден", show_alert=True)
-        return
+    # Находим флаг страны
+    country = next((c for c in config.TELEGRAM_ACCOUNTS if c["code"] == country_code), None)
+    flag = country["flag"] if country else "📱"
     
     # Создаём счёт
     invoice_data = await payment.create_invoice(
         amount=price,
-        description=f"📱 Telegram аккаунт: {item_info.get('title', 'N/A')}",
-        payload=f"{item_id}_{callback.from_user.id}"
+        description=f"{flag} {country_name} — Telegram аккаунт",
+        payload=f"{item_id}_{callback.from_user.id}_{country_code}"
     )
     
     if not invoice_data or not invoice_data.get("ok"):
@@ -45,14 +46,16 @@ async def start_buy(callback: types.CallbackQuery, state: FSMContext):
     await state.update_data(
         item_id=item_id,
         price=price,
-        item_info=item_info,
+        country_code=country_code,
+        country_name=country_name,
+        flag=flag,
         invoice_id=invoice_id
     )
     await state.set_state(PaymentFSM.waiting_payment)
     
     await callback.message.edit_text(
         f"💳 <b>Оплата</b>\n\n"
-        f"Товар: 📱 {item_info.get('title', 'Telegram аккаунт')}\n"
+        f"Товар: {flag} {country_name}\n"
         f"Сумма: <b>{price}₽</b>\n\n"
         f"Нажмите кнопку для оплаты:",
         reply_markup=types.InlineKeyboardMarkup(inline_keyboard=[
@@ -68,10 +71,12 @@ async def check_payment(callback: types.CallbackQuery, state: FSMContext):
     data = await state.get_data()
     item_id = data.get("item_id")
     price = data.get("price")
-    item_info = data.get("item_info")
+    country_code = data.get("country_code")
+    country_name = data.get("country_name")
+    flag = data.get("flag", "📱")
     invoice_id = data.get("invoice_id")
     
-    if not all([item_id, price, item_info, invoice_id]):
+    if not all([item_id, price, invoice_id]):
         await callback.answer("⚠️ Ошибка данных", show_alert=True)
         return
     
@@ -96,12 +101,14 @@ async def check_payment(callback: types.CallbackQuery, state: FSMContext):
     # Оплата подтверждена — покупаем на lzt
     await callback.message.edit_text("🛒 Покупаем аккаунт...")
     
-    lzt_price = item_info.get("price", price * 0.8)
+    # Цена на lzt (без наценки)
+    lzt_price = data.get("lzt_price", price * 0.7)
     buy_result = await lzt.buy_account(item_id, lzt_price)
     
     if not buy_result or "item" not in buy_result:
         await callback.message.edit_text(
             "❌ Не удалось купить аккаунт.\n\n"
+            f"Средства будут возвращены.\n"
             f"Поддержка: {config.SUPPORT_CHAT}"
         )
         await state.clear()
@@ -115,7 +122,7 @@ async def check_payment(callback: types.CallbackQuery, state: FSMContext):
     await create_order(
         user_id=callback.from_user.id,
         lzt_item_id=item_id,
-        title=item_info.get("title", "Telegram аккаунт"),
+        title=f"{flag} {country_name}",
         sell_price=price,
         login=login,
         password=password,
@@ -125,26 +132,13 @@ async def check_payment(callback: types.CallbackQuery, state: FSMContext):
     # Выдаём данные
     await callback.message.edit_text(
         f"✅ <b>Покупка успешна!</b>\n\n"
-        f"📱 {item_info.get('title', 'Telegram аккаунт')}\n\n"
+        f"{flag} <b>{country_name}</b>\n\n"
         f"🔑 <b>Логин:</b> <code>{login}</code>\n"
         f"🔐 <b>Пароль:</b> <code>{password}</code>\n\n"
         f"⚠️ <b>Сохраните данные!</b>\n"
-        f"Гарантия: 24 часа\n"
-        f"Поддержка: {config.SUPPORT_CHAT}",
+        f"🛡️ Гарантия: 24 часа\n"
+        f"📞 Поддержка: {config.SUPPORT_CHAT}",
         parse_mode="HTML"
     )
     
     await state.clear()
-
-# 🔹 Заглушки для будущих команд
-@router.callback_query(F.data == "orders")
-async def show_orders(callback: types.CallbackQuery):
-    await callback.answer("📚 История покупок скоро будет!", show_alert=True)
-
-@router.callback_query(F.data == "help")
-async def show_help(callback: types.CallbackQuery):
-    await callback.answer(
-        f"📞 Поддержка: {config.SUPPORT_CHAT}\n"
-        f"⏱️ Гарантия: 24 часа",
-        show_alert=True
-    )
