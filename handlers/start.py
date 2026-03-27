@@ -12,7 +12,6 @@ router = Router()
 async def cmd_start(message: types.Message, state: FSMContext):
     await state.clear()
     
-    # ✅ Теперь имена параметров совпадают
     await get_or_create_user(
         telegram_id=message.from_user.id,
         username=message.from_user.username,
@@ -22,9 +21,9 @@ async def cmd_start(message: types.Message, state: FSMContext):
     text = (
         f"👋 Привет, {message.from_user.first_name}!\n\n"
         f"🛍️ <b>{config.BOT_NAME}</b>\n\n"
-        "🔹 Проверенные аккаунты\n"
+        "🔹 Telegram аккаунты\n"
         "🔹 Мгновенная выдача\n"
-        "🔹 Гарантия на товары\n\n"
+        "🔹 Гарантия 24 часа\n\n"
         "Выберите действие:"
     )
     

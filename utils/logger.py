@@ -1,4 +1,5 @@
-import logging, sys
+# utils/logger.py
+import logging
 from pathlib import Path
 
 def setup_logging():
@@ -8,7 +9,7 @@ def setup_logging():
         format="%(asctime)s | %(name)s | %(levelname)s | %(message)s",
         handlers=[
             logging.FileHandler("logs/bot.log", encoding="utf-8"),
-            logging.StreamHandler(sys.stdout)
+            logging.StreamHandler()
         ]
     )
     logging.getLogger("aiohttp").setLevel(logging.WARNING)

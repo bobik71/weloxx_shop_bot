@@ -1,7 +1,8 @@
+# core/lzt_client.py
 import aiohttp
 import asyncio
 import time
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict
 from urllib.parse import urlencode
 import config
 from utils.logger import get_logger
@@ -9,15 +10,13 @@ from utils.logger import get_logger
 logger = get_logger(__name__)
 
 class LZTMarketClient:
-    """Клиент для API lzt.market (актуальные эндпоинты)"""
-    
     def __init__(self, token: str):
         self.token = token
-        self.base_url = config.LZT_API_BASE  # https://lzt.market/api/v1
+        self.base_url = config.LZT_API_BASE
         self.headers = {
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
-            "User-Agent": "LZTStoreBot/1.0"
+            "User-Agent": "TelegramShopBot/1.0"
         }
         self._last_request = 0
         self._min_interval = 60 / config.API_REQUESTS_PER_MIN
@@ -56,19 +55,30 @@ class LZTMarketClient:
                     if resp.status == 200:
                         return data
                     elif resp.status == 401:
-                        logger.error("❌ 401: Неверный токен")
+                        logger.error(f"❌ 401 Unauthorized: {data}")
+                        return None
+                    elif resp.status == 403:
+                        logger.error(f"❌ 403 Forbidden: {data}")
                         return None
                     elif resp.status == 404:
-                        logger.error(f"❌ 404: {endpoint}")
+                        logger.error(f"❌ 404 Not Found: {endpoint}")
                         return None
                     elif resp.status == 429:
-                        await asyncio.sleep(60 * (attempt + 1))
+                        wait_time = 60 * (attempt + 1)
+                        logger.warning(f"⚠️ 429 Rate limit, ждём {wait_time}с...")
+                        await asyncio.sleep(wait_time)
                         continue
-                    else:
-                        logger.warning(f"⚠️ {resp.status}: {data}")
+                    elif resp.status >= 500:
+                        logger.error(f"❌ Server error {resp.status}: {data}")
                         return None
+                    else:
+                        logger.warning(f"⚠️ Status {resp.status}: {data}")
+                        return None
+            except asyncio.TimeoutError:
+                logger.error(f"⏰ Timeout for {endpoint}")
+                await asyncio.sleep(2 ** attempt)
             except Exception as e:
-                logger.error(f"💥 Ошибка запроса: {e}")
+                logger.error(f"💥 Error for {endpoint}: {e}")
                 await asyncio.sleep(2 ** attempt)
         return None
 
@@ -83,23 +93,42 @@ class LZTMarketClient:
     # === MARKET ===
     async def get_categories(self) -> List[str]:
         data = await self._request("GET", "/market/categories")
-        return [c["name"].lower() for c in data.get("categories", []) if c.get("name")] if data else []
+        if data and "categories" in data:
+            return [c["name"].lower() for c in data["categories"] if c.get("name")]
+        return []
 
-    async def search_accounts(self, category: str, query: str = None,
-                           price_min: float = None, price_max: float = None,
-                           page: int = 1, limit: int = 20) -> List[Dict]:
+    async def search_accounts(self, category: str, 
+                           price_min: float = None, 
+                           price_max: float = None,
+                           page: int = 1, 
+                           limit: int = 20) -> List[Dict]:
         params = {"page": page, "limit": limit}
-        if query: params["title"] = query
         if price_min: params["pmin"] = int(price_min)
         if price_max: params["pmax"] = int(price_max)
+        
         data = await self._request("GET", f"/market/{category}", params=params)
         return data.get("items", []) if data else []
 
     async def get_account_details(self, item_id: int) -> Optional[Dict]:
         return await self._request("GET", f"/market/item/{item_id}")
 
+    async def buy_account(self, item_id: int, price: float) -> Optional[Dict]:
+        """Купить аккаунт на lzt.market"""
+        logger.info(f"🛒 Покупка ID={item_id} за {price}₽")
+        result = await self._request("POST", f"/market/item/{item_id}/buy", 
+                                    json_data={"price": price})
+        if result and "item" in result:
+            logger.info(f"✅ Покупка успешна!")
+            return result
+        logger.error(f"❌ Ошибка покупки: {result}")
+        return None
+
     async def check_account(self, item_id: int) -> Optional[Dict]:
         return await self._request("POST", f"/market/item/{item_id}/check")
 
-    async def buy_account(self, item_id: int, price: float) -> Optional[Dict]:
-        return await self._request("POST", f"/market/item/{item_id}/buy", json_data={"price": price})
+    async def health_check(self) -> bool:
+        try:
+            data = await self._request("GET", "/user")
+            return data is not None and "username" in data
+        except:
+            return False
