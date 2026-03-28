@@ -1,77 +1,204 @@
-# export_cookies.py (альтернативная версия)
-import sqlite3
-import shutil
 import os
 import json
+import shutil
+import sqlite3
+import base64
 from pathlib import Path
+from datetime import datetime
 
-# 🔹 Пути к базе куки (Windows)
-CHROME_COOKIE_PATH = Path(os.environ['LOCALAPPDATA']) / "Google/Chrome/User Data/Default/Cookies"
-EDGE_COOKIE_PATH = Path(os.environ['LOCALAPPDATA']) / "Microsoft/Edge/User Data/Default/Cookies"
+# --- Конфигурация ---
+# Укажите домен, куки которого нужно забрать (например, для lz или магазина)
+# Оставьте пустым "", чтобы выгрузить ВСЕ куки со всех сайтов
+TARGET_DOMAIN = "" 
+OUTPUT_FILE = "lzt_cookies.json"
 
-def export_cookies(browser_path: Path, output_file: str = "lzt_cookies.json"):
-    """Экспорт куки без прав админа (копируем файл)"""
-    
-    if not browser_path.exists():
-        print(f"❌ Файл куки не найден: {browser_path}")
-        return False
-    
-    # Копируем базу куки во временную папку
-    temp_path = Path("temp_cookies.db")
+# Пути к профилям браузеров (Windows)
+BROWSERS = {
+    'chrome': os.path.join(os.environ['LOCALAPPDATA'], 'Google', 'Chrome', 'User Data'),
+    'edge': os.path.join(os.environ['LOCALAPPDATA'], 'Microsoft', 'Edge', 'User Data'),
+    'brave': os.path.join(os.environ['LOCALAPPDATA'], 'BraveSoftware', 'Brave-Browser', 'User Data'),
+    'opera': os.path.join(os.environ['APPDATA'], 'Opera Software', 'Opera Stable'),
+    'firefox': os.path.join(os.environ['APPDATA'], 'Mozilla', 'Firefox', 'Profiles'),
+    'yandex': os.path.join(os.environ['LOCALAPPDATA'], 'Yandex', 'YandexBrowser', 'User Data')
+}
+
+def get_master_key(browser_path):
+    """Получает ключ расшифровки для Chrome/Edge (Local State)"""
     try:
-        shutil.copy2(browser_path, temp_path)
-    except PermissionError:
-        print("❌ Нет доступа к файлу куки. Закройте браузер и попробуйте снова.")
-        return False
-    
-    # Читаем куки из копии
-    conn = sqlite3.connect(str(temp_path))
-    cursor = conn.cursor()
-    
+        with open(os.path.join(browser_path, 'Local State'), 'r', encoding='utf-8') as f:
+            key = json.loads(f.read())['os_crypt']['encrypted_key']
+        # Удаляем префикс 'DPAPI'
+        return win32crypt.CryptUnprotectData(base64.b64decode(key)[5:], None, None, None, 0)[1]
+    except:
+        return None
+
+def decrypt_chrome_cookie(encrypted_value, master_key):
+    """Расшифровывает куки Chrome/Edge"""
     try:
-        cursor.execute("SELECT name, value, host_key, path FROM cookies WHERE host_key LIKE '%lzt.market%'")
-        rows = cursor.fetchall()
-        
-        if not rows:
-            print("⚠️ Куки для lzt.market не найдены. Войдите на сайт в браузере.")
-            return False
-        
-        cookie_list = []
-        for row in rows:
-            cookie_list.append({
-                "name": row[0],
-                "value": row[1],
-                "domain": row[2],
-                "path": row[3]
-            })
-        
-        with open(output_file, "w", encoding="utf-8") as f:
-            json.dump(cookie_list, f, indent=2, ensure_ascii=False)
-        
-        print(f"✅ Экспортировано {len(cookie_list)} куки в {output_file}")
-        return True
-        
-    except Exception as e:
-        print(f"❌ Ошибка: {e}")
+        if encrypted_value[:3] == b'v10' or encrypted_value[:3] == b'v11':
+            # AES шифрование (новые версии)
+            from Crypto.Cipher import AES
+            iv = encrypted_value[3:15]
+            payload = encrypted_value[15:-16]
+            cipher = AES.new(master_key, AES.MODE_GCM, iv)
+            decrypted = cipher.decrypt(payload)
+            return decrypted.decode('utf-8')
+        else:
+            # DPAPI (старые версии)
+            return win32crypt.CryptUnprotectData(encrypted_value, None, None, None, 0)[1].decode('utf-8')
+    except:
+        return ""
+
+def export_firefox(profile_path, output):
+    """Экспорт из Firefox (без шифрования)"""
+    src = os.path.join(profile_path, 'cookies.sqlite')
+    if not os.path.exists(src):
         return False
-    finally:
+    
+    # Копируем, т.к. файл занят браузером
+    temp_db = src + '.bak'
+    try:
+        shutil.copy2(src, temp_db)
+        conn = sqlite3.connect(temp_db)
+        cursor = conn.cursor()
+        cursor.execute("SELECT name, value, host FROM moz_cookies")
+        
+        cookies = {}
+        for name, value, host in cursor.fetchall():
+            if TARGET_DOMAIN and TARGET_DOMAIN not in host:
+                continue
+            cookies[name] = value
+            
+        with open(output, 'w', encoding='utf-8') as f:
+            json.dump(cookies, f, indent=4)
+            
         conn.close()
-        if temp_path.exists():
-            temp_path.unlink()
+        os.remove(temp_db)
+        return True
+    except Exception as e:
+        print(f"❌ Ошибка Firefox: {e}")
+        return False
 
-# === ЗАПУСК ===
-print("🔍 Экспорт куки lzt.market...\n")
+def export_chromium(browser_name, base_path, output):
+    """Экспорт из Chrome/Edge/Opera"""
+    # Ищем папку профиля (Default или Profile 1, 2...)
+    profiles = []
+    for item in os.listdir(base_path):
+        if item.startswith('Profile') or item == 'Default':
+            profiles.append(os.path.join(base_path, item))
+    
+    if not profiles:
+        return False
 
-# Пробуем Chrome
-if export_cookies(CHROME_COOKIE_PATH):
-    print("\n✅ Готово!")
-else:
-    print("\n🔹 Пробуем Edge...")
-    if export_cookies(EDGE_COOKIE_PATH):
-        print("\n✅ Готово!")
+    # Берем первый попавшийся профиль (обычно Default)
+    profile_path = profiles[0]
+    cookies_path = os.path.join(profile_path, 'Network', 'Cookies')
+    
+    if not os.path.exists(cookies_path):
+        # Для старых версий или Opera
+        cookies_path = os.path.join(profile_path, 'Cookies')
+
+    if not os.path.exists(cookies_path):
+        return False
+
+    # Получаем ключ
+    master_key = get_master_key(base_path)
+    
+    temp_db = cookies_path + '.bak'
+    try:
+        shutil.copy2(cookies_path, temp_db)
+        conn = sqlite3.connect(temp_db)
+        cursor = conn.cursor()
+        cursor.execute("SELECT name, encrypted_value, host_key FROM cookies")
+        
+        cookies = {}
+        for name, encrypted_value, host in cursor.fetchall():
+            if TARGET_DOMAIN and TARGET_DOMAIN not in host:
+                continue
+            
+            value = ""
+            if encrypted_value:
+                if master_key:
+                    value = decrypt_chrome_cookie(encrypted_value, master_key)
+                else:
+                    # Пробуем без ключа (редко работает на новых ОС)
+                    try:
+                        value = win32crypt.CryptUnprotectData(encrypted_value, None, None, None, 0)[1].decode('utf-8')
+                    except:
+                        value = ""
+            
+            if value:
+                cookies[name] = value
+                
+        with open(output, 'w', encoding='utf-8') as f:
+            json.dump(cookies, f, indent=4)
+            
+        conn.close()
+        os.remove(temp_db)
+        return True
+    except Exception as e:
+        print(f"❌ Ошибка {browser_name}: {e}")
+        return False
+
+def main():
+    print("🦊 Универсальный экспортер куки (All Browsers)")
+    print("=" * 40)
+    
+    # Приоритет: Chrome -> Edge -> Firefox -> Opera
+    found = False
+    
+    # 1. Пробуем Chromium браузеры
+    for name, path in BROWSERS.items():
+        if name == 'firefox':
+            continue
+        if os.path.exists(path):
+            print(f"🔍 Найден браузер: {name.upper()}")
+            if export_chromium(name, path, OUTPUT_FILE):
+                print(f"✅ Успешно экспортировано из {name}")
+                found = True
+                break
+    
+    # 2. Если не нашли, пробуем Firefox
+    if not found and os.path.exists(BROWSERS['firefox']):
+        print(f"🔍 Найден браузер: FIREFOX")
+        # Ищем первый профиль
+        for item in os.listdir(BROWSERS['firefox']):
+            if item.endswith('.default') or item.endswith('.default-release'):
+                profile_path = os.path.join(BROWSERS['firefox'], item)
+                if export_firefox(profile_path, OUTPUT_FILE):
+                    print(f"✅ Успешно экспортировано из Firefox")
+                    found = True
+                    break
+    
+    if found:
+        print("=" * 40)
+        print(f"📁 Файл сохранён: {os.path.abspath(OUTPUT_FILE)}")
+        
+        # Проверка содержимого
+        try:
+            with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            print(f"📋 Найдено куки: {len(data)}")
+            if len(data) > 0:
+                print("✅ Файл валиден и готов к работе с ботом")
+            else:
+                print("⚠️ Файл пуст! Возможно, вы не авторизованы в браузере или неверно указан домен.")
+        except:
+            print("⚠️ Не удалось проверить файл")
     else:
-        print("\n❌ Не удалось экспортировать куки.")
-        print("\n💡 Решение:")
-        print("   1. Закройте браузер полностью")
-        print("   2. Запустите скрипт снова")
-        print("   3. Или используйте расширение (Способ 2)")
+        print("❌ Не найдено ни одного поддерживаемого браузера")
+        print("💡 Убедитесь, что браузер установлен и вы вошли в аккаунт")
+
+    input("\nНажмите Enter для выхода...")
+
+# Для работы с шифрованием Chrome на Windows нужен win32crypt
+# Если его нет, ставим: pip install pywin32
+try:
+    import win32crypt
+except ImportError:
+    print("⚠️ Отсутствует модуль win32crypt. Установка...")
+    os.system("pip install pywin32")
+    import win32crypt
+
+if __name__ == '__main__':
+    main()
