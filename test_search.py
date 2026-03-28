@@ -1,36 +1,95 @@
 # test_search.py
-import asyncio, aiohttp, config
+import asyncio
+import aiohttp
+import config
 
 async def test():
     token = config.LZT_TOKEN
-    base = config.LZT_API_BASE
+    base = config.LZT_API_BASE  # https://lzt.market/api/v1
     
-    # Проверяем доступные категории
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/json"
+    }
+    
     async with aiohttp.ClientSession() as session:
-        # 1. Проверка категорий
-        async with session.get(
-            f"{base}/market/categories",
-            headers={"Authorization": f"Bearer {token}"}
-        ) as resp:
-            data = await resp.json()
-            print("📂 Категории:")
-            for cat in data.get("categories", [])[:10]:
-                print(f"   - {cat['name']}")
+        print("🔍 Тестирование API lzt.market\n")
         
-        # 2. Поиск Telegram аккаунтов
-        async with session.get(
-            f"{base}/market/telegram",
-            headers={"Authorization": f"Bearer {token}"},
-            params={"limit": 5}
-        ) as resp:
-            data = await resp.json()
-            print(f"\n🔍 Telegram аккаунты: {resp.status}")
-            if resp.status == 200:
-                items = data.get("items", [])
-                print(f"   Найдено: {len(items)}")
-                for item in items[:3]:
-                    print(f"   • {item.get('title', 'N/A')} — {item.get('price', 0)}₽")
+        # === ТЕСТ 1: Проверка токена ===
+        print("1️⃣ Проверка токена...")
+        async with session.get(f"{base}/user", headers=headers) as resp:
+            content_type = resp.headers.get("Content-Type", "")
+            print(f"   📡 Статус: {resp.status}")
+            print(f"   📄 Content-Type: {content_type}")
+            
+            if "application/json" in content_type:
+                data = await resp.json()
+                print(f"   ✅ JSON: {data.get('username', 'OK')}")
             else:
-                print(f"   Ошибка: {data}")
+                text = await resp.text()
+                print(f"   ❌ HTML: {text[:200]}...")
+        
+        # === ТЕСТ 2: Разные варианты категорий ===
+        print("\n2️⃣ Поиск категорий (разные URL)...")
+        
+        endpoints_to_try = [
+            "/market/categories",
+            "/categories", 
+            "/market",
+            "/items/categories",
+        ]
+        
+        for endpoint in endpoints_to_try:
+            print(f"\n   🔹 Пробуем: {endpoint}")
+            try:
+                async with session.get(f"{base}{endpoint}", headers=headers) as resp:
+                    content_type = resp.headers.get("Content-Type", "")
+                    print(f"      Статус: {resp.status}, Type: {content_type}")
+                    
+                    if resp.status == 200 and "application/json" in content_type:
+                        data = await resp.json()
+                        print(f"      ✅ JSON: {str(data)[:150]}...")
+                        break
+                    else:
+                        text = await resp.text()
+                        # Показываем первые 100 символов HTML для диагностики
+                        clean_text = text.replace("\n", " ").strip()[:100]
+                        print(f"      ❌ HTML: {clean_text}...")
+            except Exception as e:
+                print(f"      💥 Ошибка: {e}")
+        
+        # === ТЕСТ 3: Поиск Telegram аккаунтов ===
+        print("\n3️⃣ Поиск Telegram аккаунтов...")
+        
+        # Пробуем разные варианты
+        search_urls = [
+            f"{base}/market/telegram?limit=3",
+            f"{base}/telegram?limit=3",
+            f"{base}/items/telegram?limit=3",
+        ]
+        
+        for url in search_urls:
+            print(f"\n   🔹 {url}")
+            try:
+                async with session.get(url, headers=headers) as resp:
+                    content_type = resp.headers.get("Content-Type", "")
+                    print(f"      Статус: {resp.status}, Type: {content_type}")
+                    
+                    if resp.status == 200 and "application/json" in content_type:
+                        data = await resp.json()
+                        items = data.get("items", data if isinstance(data, list) else [])
+                        print(f"      ✅ Найдено: {len(items)} аккаунтов")
+                        for item in items[:2]:
+                            title = item.get("title", item.get("name", "N/A")) if isinstance(item, dict) else str(item)
+                            price = item.get("price", "N/A") if isinstance(item, dict) else "N/A"
+                            print(f"         • {title} — {price}₽")
+                        break
+                    else:
+                        text = await resp.text()
+                        clean_text = text.replace("\n", " ").strip()[:100]
+                        print(f"      ❌ HTML: {clean_text}...")
+            except Exception as e:
+                print(f"      💥 Ошибка: {e}")
 
-asyncio.run(test())
+if __name__ == "__main__":
+    asyncio.run(test())

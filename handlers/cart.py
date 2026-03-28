@@ -2,13 +2,13 @@
 from aiogram import Router, F, types
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
-from core.lzt_client import LZTMarketClient
+from core.lzt_session import LZTSession
 from core.payment import CryptoBotPayment
 from core.database import create_order
 import config
 
 router = Router()
-lzt = LZTMarketClient(config.LZT_TOKEN)
+lzt = LZTSession(config.LZT_TOKEN)
 payment = CryptoBotPayment()
 
 class PaymentFSM(StatesGroup):
@@ -16,23 +16,22 @@ class PaymentFSM(StatesGroup):
 
 @router.callback_query(F.data.startswith("buy_"))
 async def start_buy(callback: types.CallbackQuery, state: FSMContext):
-    data = callback.data.split("_")
-    item_id = int(data[1])
-    price = float(data[2])
-    country_code = data[3] if len(data) > 3 else "US"
+    parts = callback.data.split("_")
+    item_id = int(parts[1])
+    price = float(parts[2])
+    country_code = parts[3] if len(parts) > 3 else "US"
     
     state_data = await state.get_data()
     item_info = state_data.get("item_info", {})
     country_name = state_data.get("country_name", "Telegram")
     
-    # Находим флаг страны
     country = next((c for c in config.TELEGRAM_ACCOUNTS if c["code"] == country_code), None)
     flag = country["flag"] if country else "📱"
     
-    # Создаём счёт
+    # Создаём счёт CryptoBot
     invoice_data = await payment.create_invoice(
         amount=price,
-        description=f"{flag} {country_name} — Telegram аккаунт",
+        description=f"{flag} {country_name} — Telegram",
         payload=f"{item_id}_{callback.from_user.id}_{country_code}"
     )
     
@@ -57,12 +56,12 @@ async def start_buy(callback: types.CallbackQuery, state: FSMContext):
         f"💳 <b>Оплата</b>\n\n"
         f"Товар: {flag} {country_name}\n"
         f"Сумма: <b>{price}₽</b>\n\n"
-        f"Нажмите кнопку для оплаты:",
+        f"[💳 Оплатить]({invoice_url})",
         reply_markup=types.InlineKeyboardMarkup(inline_keyboard=[
-            [types.InlineKeyboardButton(text="💳 Оплатить", url=invoice_url)],
             [types.InlineKeyboardButton(text="✅ Я оплатил", callback_data="check_payment")]
         ]),
-        parse_mode="HTML"
+        parse_mode="HTML",
+        disable_web_page_preview=True
     )
     await callback.answer()
 
@@ -71,7 +70,6 @@ async def check_payment(callback: types.CallbackQuery, state: FSMContext):
     data = await state.get_data()
     item_id = data.get("item_id")
     price = data.get("price")
-    country_code = data.get("country_code")
     country_name = data.get("country_name")
     flag = data.get("flag", "📱")
     invoice_id = data.get("invoice_id")
@@ -82,12 +80,12 @@ async def check_payment(callback: types.CallbackQuery, state: FSMContext):
     
     await callback.message.edit_text("⏳ Проверяем оплату...")
     
-    # Проверяем оплату
+    # Проверка оплаты
     status = await payment.check_invoice(invoice_id)
     
     if status != "paid":
         await callback.message.edit_text(
-            f"⏳ Оплата ещё не поступила.\n\n"
+            f"⏳ Оплата не подтверждена.\n"
             f"Статус: <b>{status}</b>\n\n"
             f"Нажмите «Я оплатил» после оплаты:",
             reply_markup=types.InlineKeyboardMarkup(inline_keyboard=[
@@ -98,25 +96,24 @@ async def check_payment(callback: types.CallbackQuery, state: FSMContext):
         await callback.answer()
         return
     
-    # Оплата подтверждена — покупаем на lzt
-    await callback.message.edit_text("🛒 Покупаем аккаунт...")
+    # ✅ Оплата подтверждена — покупаем на lzt.market
+    await callback.message.edit_text("🛒 Покупаем аккаунт на lzt.market...")
     
-    # Цена на lzt (без наценки)
     lzt_price = data.get("lzt_price", price * 0.7)
-    buy_result = await lzt.buy_account(item_id, lzt_price)
+    buy_result = lzt.buy_account(item_id, lzt_price)
     
-    if not buy_result or "item" not in buy_result:
+    if not buy_result or ("item" not in buy_result and "success" not in buy_result):
         await callback.message.edit_text(
-            "❌ Не удалось купить аккаунт.\n\n"
-            f"Средства будут возвращены.\n"
+            "❌ Не удалось купить аккаунт.\n"
             f"Поддержка: {config.SUPPORT_CHAT}"
         )
         await state.clear()
         return
     
-    account_data = buy_result.get("item", {})
-    login = account_data.get("login", "N/A")
-    password = account_data.get("password", "N/A")
+    # Получаем данные аккаунта
+    account_data = buy_result.get("item", {}) or buy_result
+    login = account_data.get("login") or account_data.get("username") or "N/A"
+    password = account_data.get("password") or account_data.get("pass") or "N/A"
     
     # Сохраняем в БД
     await create_order(
@@ -129,15 +126,14 @@ async def check_payment(callback: types.CallbackQuery, state: FSMContext):
         payment_id=str(invoice_id)
     )
     
-    # Выдаём данные
+    # Выдача данных клиенту
     await callback.message.edit_text(
         f"✅ <b>Покупка успешна!</b>\n\n"
         f"{flag} <b>{country_name}</b>\n\n"
         f"🔑 <b>Логин:</b> <code>{login}</code>\n"
         f"🔐 <b>Пароль:</b> <code>{password}</code>\n\n"
         f"⚠️ <b>Сохраните данные!</b>\n"
-        f"🛡️ Гарантия: 24 часа\n"
-        f"📞 Поддержка: {config.SUPPORT_CHAT}",
+        f"🛡️ Гарантия: 24 часа",
         parse_mode="HTML"
     )
     

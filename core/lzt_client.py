@@ -2,11 +2,13 @@
 import aiohttp
 import asyncio
 import time
+import logging
 from typing import Optional, List, Dict
 from urllib.parse import urlencode
 import config
 from utils.logger import get_logger
 
+# ✅ Инициализируем logger правильно
 logger = get_logger(__name__)
 
 class LZTMarketClient:
@@ -98,15 +100,27 @@ class LZTMarketClient:
         return []
 
     async def search_accounts(self, category: str, 
-                           price_min: float = None, 
-                           price_max: float = None,
-                           page: int = 1, 
-                           limit: int = 20) -> List[Dict]:
+                             price_min: float = None, 
+                             price_max: float = None,
+                             page: int = 1, 
+                             limit: int = 20) -> List[Dict]:
         params = {"page": page, "limit": limit}
-        if price_min: params["pmin"] = int(price_min)
-        if price_max: params["pmax"] = int(price_max)
+        if price_min is not None:
+            params["pmin"] = int(price_min)
+        if price_max is not None:
+            params["pmax"] = int(price_max)
+        
+        # 🔹 Логирование поиска (исправлено)
+        print(f"🔍 Поиск: /market/{category} с параметрами {params}")
         
         data = await self._request("GET", f"/market/{category}", params=params)
+        
+        if data:
+            items = data.get("items", [])
+            print(f"✅ Найдено аккаунтов: {len(items)}")
+        else:
+            print("❌ API не вернул данные")
+        
         return data.get("items", []) if data else []
 
     async def get_account_details(self, item_id: int) -> Optional[Dict]:
@@ -114,13 +128,13 @@ class LZTMarketClient:
 
     async def buy_account(self, item_id: int, price: float) -> Optional[Dict]:
         """Купить аккаунт на lzt.market"""
-        logger.info(f"🛒 Покупка ID={item_id} за {price}₽")
+        print(f"🛒 Покупка ID={item_id} за {price}₽")
         result = await self._request("POST", f"/market/item/{item_id}/buy", 
                                     json_data={"price": price})
         if result and "item" in result:
-            logger.info(f"✅ Покупка успешна!")
+            print(f"✅ Покупка успешна!")
             return result
-        logger.error(f"❌ Ошибка покупки: {result}")
+        print(f"❌ Ошибка покупки: {result}")
         return None
 
     async def check_account(self, item_id: int) -> Optional[Dict]:
