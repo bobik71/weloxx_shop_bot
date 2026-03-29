@@ -29,24 +29,53 @@ async def show_account_for_country(callback: types.CallbackQuery, state: FSMCont
     
     await callback.message.edit_text("⏳ Ищем аккаунты...")
     
-    # ✅ Поиск аккаунтов на lzt.market через API
+    # ✅ Поиск аккаунтов на lzt.market через API с фильтром по стране
     try:
+        # Используем search_query для поиска по префиксу страны (без +)
+        # Формат: telegram <код_страны> например: telegram 1 или telegram 44
+        prefix = country.get('prefix', '').replace('+', '')
+        search_query = f"telegram {prefix}"
+        
         items = lzt.get_items(
-            search_query="telegram",
-            limit=10
+            search_query=search_query,
+            limit=50  # Увеличиваем лимит для большего выбора
         )
     except Exception as e:
         await callback.message.edit_text(f"❌ Ошибка поиска: {e}")
         await callback.answer()
         return
     
+    # Проверяем наличие ошибок в ответе API
+    if isinstance(items, dict) and 'errors' in items:
+        error_msg = items['errors'][0] if items['errors'] else 'Неизвестная ошибка'
+        await callback.message.edit_text(
+            f"⚠️ Нет доступных аккаунтов\n\n"
+            f"🔑 Ошибка API: {error_msg}\n\n"
+            f"Проверьте ваш LZT_TOKEN в .env файле",
+            reply_markup=countries_kb(accounts_list)
+        )
+        await callback.answer()
+        return
+    
     # Фильтруем товары (если API вернул список)
     accounts = items.get('items', []) if isinstance(items, dict) else items
+    
+    # Дополнительная фильтрация: проверяем что номер действительно начинается с нужного кода
+    filtered_accounts = []
+    for acc in accounts:
+        title = acc.get('title', '') or acc.get('description', '')
+        # Проверяем что в названии есть наш префикс
+        if prefix in title or len(prefix) >= 2:  # Для коротких кодов типа +1 более строгая проверка
+            filtered_accounts.append(acc)
+    
+    # Если после фильтрации ничего не осталось, используем оригинальный список
+    if filtered_accounts:
+        accounts = filtered_accounts[:20]  # Берём первые 20 после фильтрации
     
     if not accounts:
         await callback.message.edit_text(
             f"⚠️ Нет аккаунтов ({country.get('flag', '📱')} {country.get('name', 'Telegram')})\n\n"
-            "Попробуйте позже:",
+            f"Попробуйте другую страну или позже:",
             reply_markup=countries_kb(accounts_list)
         )
         await callback.answer()

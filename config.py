@@ -53,27 +53,34 @@ def check_config():
 
 # config.py — добавьте в конец
 TELEGRAM_ACCOUNTS = [
-    {
-        "code": "US",
-        "name": "США",
-        "flag": "🇺🇸",
-        "prefix": "+1",
-        "price": 150
-    },
-    {
-        "code": "RU",
-        "name": "Россия",
-        "flag": "🇷🇺",
-        "prefix": "+7",
-        "price": 100
-    },
-    {
-        "code": "GB",
-        "name": "Великобритания",
-        "flag": "🇬🇧",
-        "prefix": "+44",
-        "price": 200
-    }
+    {"code": "US", "name": "США", "flag": "🇺🇸", "prefix": "+1", "price": 40},
+    {"code": "MM", "name": "Мьянма", "flag": "🇲🇲", "prefix": "+95", "price": 40},
+    {"code": "IN", "name": "Индия", "flag": "🇮🇳", "prefix": "+91", "price": 45},
+    {"code": "CO", "name": "Колумбия", "flag": "🇨🇴", "prefix": "+57", "price": 45},
+    {"code": "KE", "name": "Кения", "flag": "🇰🇪", "prefix": "+254", "price": 45},
+    {"code": "CA", "name": "Канада", "flag": "🇨🇦", "prefix": "+1", "price": 50},
+    {"code": "ID", "name": "Индонезия", "flag": "🇮🇩", "prefix": "+62", "price": 50},
+    {"code": "BD", "name": "Бангладеш", "flag": "🇧🇩", "prefix": "+880", "price": 50},
+    {"code": "EG", "name": "Египет", "flag": "🇪🇬", "prefix": "+20", "price": 55},
+    {"code": "AR", "name": "Аргентина", "flag": "🇦🇷", "prefix": "+54", "price": 65},
+    {"code": "VN", "name": "Вьетнам", "flag": "🇻🇳", "prefix": "+84", "price": 70},
+    {"code": "GB", "name": "Великобритания", "flag": "🇬🇧", "prefix": "+44", "price": 80},
+    {"code": "AF", "name": "Афганистан", "flag": "🇦🇫", "prefix": "+93", "price": 80},
+    {"code": "BR", "name": "Бразилия", "flag": "🇧🇷", "prefix": "+55", "price": 85},
+    {"code": "EC", "name": "Эквадор", "flag": "🇪🇨", "prefix": "+593", "price": 85},
+    {"code": "PH", "name": "Филиппины", "flag": "🇵🇭", "prefix": "+63", "price": 90},
+    {"code": "UZ", "name": "Узбекистан", "flag": "🇺🇿", "prefix": "+998", "price": 90},
+    {"code": "TH", "name": "Таиланд", "flag": "🇹🇭", "prefix": "+66", "price": 100},
+    {"code": "DZ", "name": "Алжир", "flag": "🇩🇿", "prefix": "+213", "price": 100},
+    {"code": "YE", "name": "Йемен", "flag": "🇾🇪", "prefix": "+967", "price": 120},
+    {"code": "MX", "name": "Мексика", "flag": "🇲🇽", "prefix": "+52", "price": 120},
+    {"code": "ES", "name": "Испания", "flag": "🇪🇸", "prefix": "+34", "price": 130},
+    {"code": "VE", "name": "Венесуэла", "flag": "🇻🇪", "prefix": "+58", "price": 140},
+    {"code": "MY", "name": "Малайзия", "flag": "🇲🇾", "prefix": "+60", "price": 140},
+    {"code": "PE", "name": "Перу", "flag": "🇵🇪", "prefix": "+51", "price": 140},
+    {"code": "KZ", "name": "Казахстан", "flag": "🇰🇿", "prefix": "+7", "price": 150},
+    {"code": "FR", "name": "Франция", "flag": "🇫🇷", "prefix": "+33", "price": 170},
+    {"code": "UA", "name": "Украина", "flag": "🇺🇦", "prefix": "+380", "price": 180},
 ]
 
 SUPPORT_CHAT = os.getenv('SUPPORT_CHAT', '@support')
