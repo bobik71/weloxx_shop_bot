@@ -54,3 +54,37 @@ class CryptoBotPayment:
             hashlib.sha256
         ).hexdigest()
         return hmac.compare_digest(expected, signature)
+    
+# core/payment.py
+import config
+import logging
+
+logger = logging.getLogger(__name__)
+
+class CryptoBotPayment:
+    def __init__(self):
+        self.token = config.CRYPTOBOT_TOKEN
+        
+        # ✅ Проверка: если токен пустой — не падаем, а предупреждаем
+        if not self.token:
+            logger.warning("⚠️ CRYPTOBOT_TOKEN не задан. Платежи не будут работать.")
+            self.enabled = False
+        else:
+            self.enabled = True
+            logger.info("✅ CryptoBot платежи включены")
+    
+    async def create_invoice(self, amount: float, description: str) -> str:
+        """Создаёт счёт на оплату"""
+        if not self.enabled:
+            raise RuntimeError("CryptoBot не настроен")
+        
+        # ... ваш код создания инвойса ...
+        pass
+    
+    async def check_payment(self, invoice_id: str) -> bool:
+        """Проверяет статус оплаты"""
+        if not self.enabled:
+            return False
+        
+        # ... ваш код проверки ...
+        pass

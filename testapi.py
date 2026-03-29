@@ -1,41 +1,22 @@
-# test_all_urls.py
-import asyncio
-import aiohttp
+# test_api.py
+import json
+from core.lzt_api import LZTClient
 
-TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJzdWIiOjk4NzQ1NzQsImlzcyI6Imx6dCIsImlhdCI6MTc3NDYxODMzNiwianRpIjoiOTUyMjA3Iiwic2NvcGUiOiJiYXNpYyByZWFkIHBvc3QgY29udmVyc2F0ZSBwYXltZW50IGludm9pY2UgY2hhdGJveCBtYXJrZXQiLCJleHAiOjE5MzIyOTgzMzZ9.mACtGrDqS_r-TAF3oIvEzs4fIrhsC0LNHKfJYSNXsHVQUVmwDw5-Mqd6GTfZJWUPNnFh0zxlV3p5cKoGoSggEcDd8PeCwiWoqYkK1DgcGW-1QYxK3jpaRop5pukirk6w1zozB3mJn50Z2Qr61YZXXL_5_2TA4DomUmWZodrXVKE"
+client = LZTClient()
 
-BASE_URLS = [
-    "https://api.lzt.market",
-    "https://api.zelenka.guru",
-    "https://lzt.market/api",
-    "https://market.lzt.dev",
-]
-
-ENDPOINTS = [
-    "/v1/user/money",
-    "/v1/user",
-    "/user/money",
-    "/user",
-]
-
-async def test_url(session, base, endpoint):
-    url = f"{base}{endpoint}"
-    headers = {"Authorization": f"Bearer {TOKEN}"}
+try:
+    response = client.get_me()
     
-    try:
-        async with session.get(url, headers=headers, timeout=5) as resp:
-            if resp.status != 404:
-                print(f"✅ {url} → {resp.status}")
-                return True
-    except:
-        pass
-    return False
-
-async def main():
-    print("🔍 Поиск рабочего URL...\n")
-    async with aiohttp.ClientSession() as session:
-        for base in BASE_URLS:
-            for endpoint in ENDPOINTS:
-                await test_url(session, base, endpoint)
-
-asyncio.run(main())
+    # 🔍 Выводим ВСЁ, что пришло от API
+    print("📄 Полный ответ API:")
+    print(json.dumps(response, indent=2, ensure_ascii=False))
+    
+    # 🔍 Проверяем структуру
+    if 'user' in response:
+        print("\n✅ Ключ 'user' найден!")
+        print(f"📋 Доступные поля в user: {list(response['user'].keys())}")
+    else:
+        print("\n⚠️ Ключ 'user' не найден! Структура ответа другая.")
+        
+except Exception as e:
+    print(f"❌ Ошибка: {e}")
