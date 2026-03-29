@@ -34,7 +34,7 @@ async def show_account_for_country(callback: types.CallbackQuery, state: FSMCont
         # Используем search_query для поиска по префиксу страны (без +)
         # Формат: telegram <код_страны> например: telegram 1 или telegram 44
         prefix = country.get('prefix', '').replace('+', '')
-        search_query = f"telegram {prefix}"
+        search_query = f"{prefix}"
         
         items = lzt.get_items(
             search_query=search_query,
@@ -46,26 +46,38 @@ async def show_account_for_country(callback: types.CallbackQuery, state: FSMCont
         return
     
     # Проверяем наличие ошибок в ответе API
-    if isinstance(items, dict) and 'errors' in items:
-        error_msg = items['errors'][0] if items['errors'] else 'Неизвестная ошибка'
-        await callback.message.edit_text(
-            f"⚠️ Нет доступных аккаунтов\n\n"
-            f"🔑 Ошибка API: {error_msg}\n\n"
-            f"Проверьте ваш LZT_TOKEN в .env файле",
-            reply_markup=countries_kb(accounts_list)
-        )
-        await callback.answer()
-        return
-    
-    # Фильтруем товары (если API вернул список)
-    accounts = items.get('items', []) if isinstance(items, dict) else items
+    if isinstance(items, dict):
+        if 'errors' in items and items['errors']:
+            error_msg = items['errors'][0] if isinstance(items['errors'], list) else str(items['errors'])
+            await callback.message.edit_text(
+                f"⚠️ Нет доступных аккаунтов\n\n"
+                f"🔑 Ошибка API: {error_msg}\n\n"
+                f"Проверьте ваш LZT_TOKEN в .env файле",
+                reply_markup=countries_kb(accounts_list)
+            )
+            await callback.answer()
+            return
+        
+        # Если есть поле 'item' (единичный товар), это не список
+        if 'item' in items:
+            accounts = [items['item']]
+        elif 'items' in items:
+            accounts = items['items']
+        else:
+            accounts = []
+    elif isinstance(items, list):
+        accounts = items
+    else:
+        accounts = []
     
     # Дополнительная фильтрация: проверяем что номер действительно начинается с нужного кода
     filtered_accounts = []
     for acc in accounts:
         title = acc.get('title', '') or acc.get('description', '')
-        # Проверяем что в названии есть наш префикс
-        if prefix in title or len(prefix) >= 2:  # Для коротких кодов типа +1 более строгая проверка
+        phone = acc.get('phone_number', '') or acc.get('phone', '')
+        
+        # Проверяем наличие префикса в названии или номере телефона
+        if prefix in title or prefix in phone or (len(prefix) <= 2 and title.lower().startswith('telegram')):
             filtered_accounts.append(acc)
     
     # Если после фильтрации ничего не осталось, используем оригинальный список
