@@ -19,8 +19,10 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 LZT_TOKEN = os.getenv('LZT_TOKEN')
 MARKET_API_BASE = "https://api.lzt.market"
 FORUM_API_BASE = "https://prod-api.lolz.live"
+LZT_API_BASE = "https://api.lzt.market"  # Для lzt_client.py
 API_TIMEOUT = int(os.getenv('API_TIMEOUT', 10))
 REQUEST_DELAY = float(os.getenv('REQUEST_DELAY', 2))
+API_REQUESTS_PER_MIN = int(os.getenv('API_REQUESTS_PER_MIN', 30))  # Лимит запросов в минуту
 
 # 💰 Платёжные системы
 CRYPTOBOT_TOKEN = os.getenv('CRYPTOBOT_TOKEN')

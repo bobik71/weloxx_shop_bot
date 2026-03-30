@@ -10,15 +10,28 @@ logger = get_logger(__name__)
 class CryptoBotPayment:
     def __init__(self):
         self.token = config.CRYPTOBOT_TOKEN
-        self.testnet = config.CRYPTOBOT_TESTNET
-        self.base_url = "https://testnet.pay.crypt.bot/api" if self.testnet else "https://pay.crypt.bot/api"
-        self.headers = {
-            "Crypto-Bot-API-Secret": self.token,
-            "Content-Type": "application/json"
-        }
+        self.testnet = getattr(config, 'CRYPTOBOT_TESTNET', False)
+        
+        # ✅ Проверка: если токен пустой — не падаем, а предупреждаем
+        if not self.token:
+            logger.warning("⚠️ CRYPTOBOT_TOKEN не задан. Платежи не будут работать.")
+            self.enabled = False
+            self.base_url = "https://pay.crypt.bot/api"
+            self.headers = {}
+        else:
+            self.enabled = True
+            logger.info("✅ CryptoBot платежи включены")
+            self.base_url = "https://testnet.pay.crypt.bot/api" if self.testnet else "https://pay.crypt.bot/api"
+            self.headers = {
+                "Crypto-Bot-API-Secret": self.token,
+                "Content-Type": "application/json"
+            }
     
     async def create_invoice(self, amount: float, description: str, payload: str) -> dict:
         """Создать счёт на оплату"""
+        if not self.enabled:
+            raise RuntimeError("CryptoBot не настроен (CRYPTOBOT_TOKEN не задан в .env)")
+        
         async with aiohttp.ClientSession() as session:
             async with session.post(
                 f"{self.base_url}/createInvoice",
@@ -36,6 +49,9 @@ class CryptoBotPayment:
     
     async def check_invoice(self, invoice_id: int) -> str:
         """Проверить статус счёта"""
+        if not self.enabled:
+            return "error"
+        
         async with aiohttp.ClientSession() as session:
             async with session.post(
                 f"{self.base_url}/getInvoices",
@@ -48,43 +64,12 @@ class CryptoBotPayment:
     
     def verify_webhook(self, body: str, signature: str) -> bool:
         """Проверить подпись вебхука"""
+        if not self.token:
+            return False
+        
         expected = hmac.new(
             self.token.encode(),
             body.encode(),
             hashlib.sha256
         ).hexdigest()
         return hmac.compare_digest(expected, signature)
-    
-# core/payment.py
-import config
-import logging
-
-logger = logging.getLogger(__name__)
-
-class CryptoBotPayment:
-    def __init__(self):
-        self.token = config.CRYPTOBOT_TOKEN
-        
-        # ✅ Проверка: если токен пустой — не падаем, а предупреждаем
-        if not self.token:
-            logger.warning("⚠️ CRYPTOBOT_TOKEN не задан. Платежи не будут работать.")
-            self.enabled = False
-        else:
-            self.enabled = True
-            logger.info("✅ CryptoBot платежи включены")
-    
-    async def create_invoice(self, amount: float, description: str) -> str:
-        """Создаёт счёт на оплату"""
-        if not self.enabled:
-            raise RuntimeError("CryptoBot не настроен")
-        
-        # ... ваш код создания инвойса ...
-        pass
-    
-    async def check_payment(self, invoice_id: str) -> bool:
-        """Проверяет статус оплаты"""
-        if not self.enabled:
-            return False
-        
-        # ... ваш код проверки ...
-        pass
