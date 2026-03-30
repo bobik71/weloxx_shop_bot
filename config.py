@@ -85,3 +85,7 @@ TELEGRAM_ACCOUNTS = [
 
 SUPPORT_CHAT = os.getenv('SUPPORT_CHAT', '@support')
 BOT_NAME = os.getenv('BOT_NAME', 'Weloxx Shop')
+
+# 📢 Канал для обязательной подписки
+REQUIRED_CHANNEL = os.getenv('REQUIRED_CHANNEL', '@weloxxsale')
+CHANNEL_ID = os.getenv('CHANNEL_ID', '-1001234567890')  # Замените на реальный ID канала
