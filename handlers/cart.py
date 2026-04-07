@@ -166,6 +166,9 @@ async def check_payment(callback: types.CallbackQuery, state: FSMContext):
         f"🔐 <b>Пароль:</b> <code>{password}</code>\n\n"
         f"⚠️ <b>Сохраните данные!</b>\n"
         f"🛡️ Гарантия: 24 часа",
+        reply_markup=types.InlineKeyboardMarkup(inline_keyboard=[
+            [types.InlineKeyboardButton(text="🏠 В главное меню", callback_data="main_menu")]
+        ]),
         parse_mode="HTML"
     )
     
