@@ -1,93 +1,63 @@
-# config.py
+# config.py — Центральная конфигурация бота Weloxx Shop
 import os
 from dotenv import load_dotenv
-from pathlib import Path
 
-# Загружаем переменные из .env
+# Загружаем .env из корня проекта
 load_dotenv()
 
-# 📁 Пути
-BASE_DIR = Path(__file__).resolve().parent
-DATA_DIR = BASE_DIR / "data"
-DATA_DIR.mkdir(parents=True, exist_ok=True)
-DB_PATH = os.getenv("DB_PATH", DATA_DIR / "store.db")
+# ==================== TELEGRAM ====================
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+if not BOT_TOKEN:
+    raise ValueError("❌ BOT_TOKEN не задан в .env")
 
-# 🔑 Telegram
-BOT_TOKEN = os.getenv('BOT_TOKEN')
+# Админы: список ID через запятую (например: "123456789,987654321")
+ADMIN_IDS_RAW = os.getenv("ADMIN_IDS", "")
+ADMIN_IDS = set(int(x.strip()) for x in ADMIN_IDS_RAW.split(",") if x.strip().isdigit()) if ADMIN_IDS_RAW else set()
 
-# 🔑 LZT Market API
-LZT_TOKEN = os.getenv('LZT_TOKEN')
-MARKET_API_BASE = "https://api.lzt.market"
-FORUM_API_BASE = "https://prod-api.lolz.live"
-LZT_API_BASE = "https://api.lzt.market"  # Для lzt_client.py
-API_TIMEOUT = int(os.getenv('API_TIMEOUT', 10))
-REQUEST_DELAY = float(os.getenv('REQUEST_DELAY', 2))
-API_REQUESTS_PER_MIN = int(os.getenv('API_REQUESTS_PER_MIN', 30))  # Лимит запросов в минуту
+# ==================== ОБЯЗАТЕЛЬНАЯ ПОДПИСКА ====================
+# CHANNEL_ID — для API-запросов (get_chat_member). Может быть @username или числовой ID
+CHANNEL_ID = os.getenv("CHANNEL_ID", "@weloxxsale")
 
-# 💰 Платёжные системы
-CRYPTOBOT_TOKEN = os.getenv('CRYPTOBOT_TOKEN')
-CRYPTOCLOUD_TOKEN = os.getenv('CRYPTOCLOUD_TOKEN')
+# REQUIRED_CHANNEL — для отображения в интерфейсе (всегда с @)
+REQUIRED_CHANNEL = os.getenv("REQUIRED_CHANNEL", "@weloxxsale")
 
-# 🔐 Безопасность
-ENCRYPTION_KEY = os.getenv('ENCRYPTION_KEY', 'change-me-32-chars-minimum!!')
-ADMIN_IDS = os.getenv('ADMIN_IDS', '')
+# ==================== LZT MARKET API ====================
+LZT_TOKEN = os.getenv("LZT_TOKEN")
+if not LZT_TOKEN:
+    raise ValueError("❌ LZT_TOKEN не задан в .env")
 
-# ✅ Валидация конфигурации
-def check_config():
-    errors = []
-    if not BOT_TOKEN:
-        errors.append("❌ BOT_TOKEN не задан")
-    if not LZT_TOKEN:
-        errors.append("❌ LZT_TOKEN не задан")
-    if LZT_TOKEN and len(LZT_TOKEN) < 100:
-        errors.append("❌ LZT_TOKEN слишком короткий")
-    if ENCRYPTION_KEY == 'change-me-32-chars-minimum!!':
-        errors.append("❌ ENCRYPTION_KEY не изменён")
+LZT_BASE_URL = "https://prod-api.lzt.market"  # ✅ Рабочий эндпоинт
+API_TIMEOUT = int(os.getenv("API_TIMEOUT", "15"))
+REQUEST_DELAY = float(os.getenv("REQUEST_DELAY", "1.5"))
+
+# ==================== CRYPTOBOT (опционально) ====================
+CRYPTOBOT_TOKEN = os.getenv("CRYPTOBOT_TOKEN")
+
+# ==================== БАЗА ДАННЫХ ====================
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///data/shop.db")
+
+# ==================== ЛОГИРОВАНИЕ ====================
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
+LOG_FILE = os.getenv("LOG_FILE", "logs/bot.log")
+
+# ==================== НАСТРОЙКИ БОТА ====================
+BOT_NAME = os.getenv("BOT_NAME", "Weloxx Shop")
+CURRENCY = os.getenv("CURRENCY", "RUB")
+SUPPORT_LINK = os.getenv("SUPPORT_LINK", "https://t.me/weloxx_support")
+
+# ==================== ПРОВЕРКА КОНФИГУРАЦИИ ====================
+def validate_config():
+    """Проверяет наличие обязательных переменных"""
+    required = ["BOT_TOKEN", "LZT_TOKEN"]
+    missing = [var for var in required if not os.getenv(var)]
+    if missing:
+        raise ValueError(f"❌ Отсутствуют обязательные переменные в .env: {', '.join(missing)}")
     
-    if errors:
-        print("⚠️ ОШИБКИ КОНФИГУРАЦИИ:")
-        for err in errors:
-            print(f"   {err}")
-        return False
+    # Предупреждение, если нет админов
+    if not ADMIN_IDS:
+        print("⚠️ ADMIN_IDS не задан — админ-команды будут недоступны")
     
-    print("✅ Конфигурация проверена успешно")
     return True
 
-# config.py — добавьте в конец
-TELEGRAM_ACCOUNTS = [
-    {"code": "US", "name": "США", "flag": "🇺🇸", "prefix": "+1", "price": 40},
-    {"code": "MM", "name": "Мьянма", "flag": "🇲🇲", "prefix": "+95", "price": 40},
-    {"code": "IN", "name": "Индия", "flag": "🇮🇳", "prefix": "+91", "price": 45},
-    {"code": "CO", "name": "Колумбия", "flag": "🇨🇴", "prefix": "+57", "price": 45},
-    {"code": "KE", "name": "Кения", "flag": "🇰🇪", "prefix": "+254", "price": 45},
-    {"code": "CA", "name": "Канада", "flag": "🇨🇦", "prefix": "+1", "price": 50},
-    {"code": "ID", "name": "Индонезия", "flag": "🇮🇩", "prefix": "+62", "price": 50},
-    {"code": "BD", "name": "Бангладеш", "flag": "🇧🇩", "prefix": "+880", "price": 50},
-    {"code": "EG", "name": "Египет", "flag": "🇪🇬", "prefix": "+20", "price": 55},
-    {"code": "AR", "name": "Аргентина", "flag": "🇦🇷", "prefix": "+54", "price": 65},
-    {"code": "VN", "name": "Вьетнам", "flag": "🇻🇳", "prefix": "+84", "price": 70},
-    {"code": "GB", "name": "Великобритания", "flag": "🇬🇧", "prefix": "+44", "price": 80},
-    {"code": "AF", "name": "Афганистан", "flag": "🇦🇫", "prefix": "+93", "price": 80},
-    {"code": "BR", "name": "Бразилия", "flag": "🇧🇷", "prefix": "+55", "price": 85},
-    {"code": "EC", "name": "Эквадор", "flag": "🇪🇨", "prefix": "+593", "price": 85},
-    {"code": "PH", "name": "Филиппины", "flag": "🇵🇭", "prefix": "+63", "price": 90},
-    {"code": "UZ", "name": "Узбекистан", "flag": "🇺🇿", "prefix": "+998", "price": 90},
-    {"code": "TH", "name": "Таиланд", "flag": "🇹🇭", "prefix": "+66", "price": 100},
-    {"code": "DZ", "name": "Алжир", "flag": "🇩🇿", "prefix": "+213", "price": 100},
-    {"code": "YE", "name": "Йемен", "flag": "🇾🇪", "prefix": "+967", "price": 120},
-    {"code": "MX", "name": "Мексика", "flag": "🇲🇽", "prefix": "+52", "price": 120},
-    {"code": "ES", "name": "Испания", "flag": "🇪🇸", "prefix": "+34", "price": 130},
-    {"code": "VE", "name": "Венесуэла", "flag": "🇻🇪", "prefix": "+58", "price": 140},
-    {"code": "MY", "name": "Малайзия", "flag": "🇲🇾", "prefix": "+60", "price": 140},
-    {"code": "PE", "name": "Перу", "flag": "🇵🇪", "prefix": "+51", "price": 140},
-    {"code": "KZ", "name": "Казахстан", "flag": "🇰🇿", "prefix": "+7", "price": 150},
-    {"code": "FR", "name": "Франция", "flag": "🇫🇷", "prefix": "+33", "price": 170},
-    {"code": "UA", "name": "Украина", "flag": "🇺🇦", "prefix": "+380", "price": 180},
-]
-
-SUPPORT_CHAT = os.getenv('SUPPORT_CHAT', '@support')
-BOT_NAME = os.getenv('BOT_NAME', 'Weloxx Shop')
-
-# 📢 Канал для обязательной подписки
-REQUIRED_CHANNEL = os.getenv('REQUIRED_CHANNEL', '@weloxxsale')
-CHANNEL_ID = os.getenv('CHANNEL_ID', '-1001234567890')  # Замените на реальный ID канала
+# Запускаем проверку при импорте
+validate_config()

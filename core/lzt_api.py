@@ -1,79 +1,58 @@
-# core/lzt_api.py
 import requests
-from config import LZT_TOKEN, MARKET_API_BASE, API_TIMEOUT
+from config import LZT_TOKEN, LZT_BASE_URL, API_TIMEOUT
+import logging
 
-class LZTClient:
+logger = logging.getLogger(__name__)
+
+class LZTClient:  # ✅ Имя как в оригинале
     def __init__(self):
-        self.base_url = MARKET_API_BASE
-        self.headers = {
-            "Authorization": f"Bearer {LZT_TOKEN}",
-            "Content-Type": "application/json"
-        }
+        self.token = LZT_TOKEN
+        self.base_url = LZT_BASE_URL
         self.session = requests.Session()
-        self.session.headers.update(self.headers)
-    
-    def get_me(self):
-        """Получить информацию о пользователе"""
-        response = self.session.get(f"{self.base_url}/user", timeout=API_TIMEOUT)
-        return response.json()
-    
-    def get_username(self):
-        data = self.get_me()
-        if data and 'user' in data:
-            return data['user'].get('username', 'unknown')
-        return 'unknown'
-    
-    def get_balance(self):
-        data = self.get_me()
-        if data and 'user' in data:
-            return data['user'].get('balance', '0')
-        return '0'
-    
-    def get_balance_value(self):
-        data = self.get_me()
-        if data and 'user' in data:
-            return data['user'].get('convertedBalance', 0)
-        return 0
-    
-    def get_items(self, search_query: str = None, limit: int = 20, page: int = 1):
-        """
-        Поиск аккаунтов Telegram на lzt.market
-        Правильный endpoint: /market/telegram
-        """
-        params = {
-            "page": page,
-            "limit": limit
-        }
-        
-        # Добавляем поисковый запрос если указан
-        if search_query:
-            params["search"] = search_query
-        
-        # Запрашиваем аккаунты Telegram
-        response = self.session.get(
-            f"{self.base_url}/market/telegram", 
-            params=params, 
-            timeout=API_TIMEOUT
-        )
-        return response.json()
-    
-    def buy_item(self, item_id: int, price: float = None):
-        """Купить аккаунт"""
-        data = {}
-        if price is not None:
-            data["price"] = price
-        
-        response = self.session.post(
-            f"{self.base_url}/market/item/{item_id}/buy", 
-            json=data,
-            timeout=API_TIMEOUT
-        )
-        return response.json()
-    
-    def get_item_info(self, item_id: int):
-        """Получить информацию об аккаунте"""
-        response = self.session.get(
-            f"{self.base_url}/market/item/{item_id}", 
-            timeout=API_TIMEOUT
-        )
-        return response.json()
+        self.session.headers.update({
+            "Authorization": f"Bearer {self.token}",
+            "Content-Type": "application/json",
+            "User-Agent": "WeloxxShopBot/1.0"
+        })
+
+    def check_connection(self) -> dict:
+        try:
+            resp = self.session.get(f"{self.base_url}/me", timeout=API_TIMEOUT)
+            resp.raise_for_status()
+            data = resp.json()
+            return {
+                "success": True,
+                "username": data.get("username") or data.get("login", "unknown"),
+                "balance": data.get("balance", 0)
+            }
+        except Exception as e:
+            logger.error(f"Ошибка проверки LZT API: {e}")
+            return {"success": False, "username": "unknown", "balance": 0}
+
+    def get_telegram_accounts(self, limit: int = 20, page: int = 1, search: str = None):
+        try:
+            params = {"limit": limit, "page": page}
+            if search:
+                params["title"] = search
+
+            url = f"{self.base_url}/telegram"  # ✅ Без /market/
+            resp = self.session.get(url, params=params, timeout=API_TIMEOUT)
+            resp.raise_for_status()
+            return resp.json()
+        except Exception as e:
+            logger.error(f"Ошибка получения аккаунтов: {e}")
+            return {"items": [], "total": 0}
+
+    def get_account_info(self, item_id: int):
+        try:
+            url = f"{self.base_url}/telegram/{item_id}"
+            resp = self.session.get(url, timeout=API_TIMEOUT)
+            resp.raise_for_status()
+            return resp.json()
+        except Exception as e:
+            logger.error(f"Ошибка получения инфо о лоте {item_id}: {e}")
+            return None
+
+    # 🔗 Совместимость со старым кодом хендлеров
+    get_items = get_telegram_accounts
+    get_item_info = get_account_info
