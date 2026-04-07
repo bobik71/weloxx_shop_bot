@@ -1,0 +1,1257 @@
+2026-03-27 17:04:03,249 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-27 17:05:48,249 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-27 17:05:51,200 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-27 17:05:51,273 | aiogram.dispatcher | INFO | Start polling
+2026-03-27 17:05:51,357 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-27 17:06:19,348 | aiogram.event | INFO | Update id=374242772 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-27 17:06:24,067 | aiogram.event | INFO | Update id=374242773 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-27 17:06:36,529 | aiogram.event | INFO | Update id=374242774 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-27 17:07:17,274 | aiogram.event | INFO | Update id=374242775 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-27 17:09:24,949 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-27 17:09:25,180 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-27 17:09:25,249 | aiogram.dispatcher | INFO | Start polling
+2026-03-27 17:09:25,305 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-27 17:09:25,378 | aiogram.event | INFO | Update id=374242776 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-27 17:10:37,475 | aiogram.event | INFO | Update id=374242777 is not handled. Duration 15 ms by bot id=8791251927
+2026-03-27 17:14:04,046 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-27 17:14:04,521 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-27 17:14:04,651 | aiogram.dispatcher | INFO | Start polling
+2026-03-27 17:14:04,727 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-27 17:14:15,140 | aiogram.event | INFO | Update id=374242778 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-27 17:14:15,141 | aiogram.event | ERROR | Cause exception while process update id=374242778 by bot id=8791251927
+TypeError: get_or_create_user() got an unexpected keyword argument 'telegram_id'
+Traceback (most recent call last):
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 320, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 164, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 58, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\fsm\middleware.py", line 43, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 189, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 181, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "d:\progect\Weloxx_shop_bot\handlers\start.py", line 17, in cmd_start
+    await get_or_create_user(
+          ^^^^^^^^^^^^^^^^^^^
+TypeError: get_or_create_user() got an unexpected keyword argument 'telegram_id'
+2026-03-27 17:16:55,807 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-27 17:16:56,031 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-27 17:16:56,166 | aiogram.dispatcher | INFO | Start polling
+2026-03-27 17:16:56,235 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-27 17:17:12,303 | aiogram.event | INFO | Update id=374242779 is not handled. Duration 15 ms by bot id=8791251927
+2026-03-27 17:17:12,303 | aiogram.event | ERROR | Cause exception while process update id=374242779 by bot id=8791251927
+TypeError: get_or_create_user() got an unexpected keyword argument 'telegram_id'
+Traceback (most recent call last):
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 320, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 164, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 58, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\fsm\middleware.py", line 43, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 189, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 181, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "d:\progect\Weloxx_shop_bot\handlers\start.py", line 17, in cmd_start
+    await get_or_create_user(
+          ^^^^^^^^^^^^^^^^^^^
+TypeError: get_or_create_user() got an unexpected keyword argument 'telegram_id'
+2026-03-27 17:17:13,175 | aiogram.event | INFO | Update id=374242780 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-27 17:17:13,175 | aiogram.event | ERROR | Cause exception while process update id=374242780 by bot id=8791251927
+TypeError: get_or_create_user() got an unexpected keyword argument 'telegram_id'
+Traceback (most recent call last):
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 320, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 164, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 58, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\fsm\middleware.py", line 43, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 189, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 181, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "d:\progect\Weloxx_shop_bot\handlers\start.py", line 17, in cmd_start
+    await get_or_create_user(
+          ^^^^^^^^^^^^^^^^^^^
+TypeError: get_or_create_user() got an unexpected keyword argument 'telegram_id'
+2026-03-27 17:24:02,189 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-27 17:24:02,474 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-27 17:24:02,547 | aiogram.dispatcher | INFO | Start polling
+2026-03-27 17:24:02,620 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-27 17:24:11,041 | core.database | INFO | 🆕 Новый пользователь: 1527409964
+2026-03-27 17:24:11,302 | aiogram.event | INFO | Update id=374242781 is handled. Duration 265 ms by bot id=8791251927
+2026-03-27 17:24:14,027 | core.lzt_client | ERROR | 💥 Ошибка запроса: 'NoneType' object has no attribute 'request'
+2026-03-27 17:24:15,032 | core.lzt_client | ERROR | 💥 Ошибка запроса: 'NoneType' object has no attribute 'request'
+2026-03-27 17:24:17,045 | core.lzt_client | ERROR | 💥 Ошибка запроса: 'NoneType' object has no attribute 'request'
+2026-03-27 17:24:21,255 | aiogram.event | INFO | Update id=374242782 is handled. Duration 7219 ms by bot id=8791251927
+2026-03-27 17:24:24,762 | aiogram.event | INFO | Update id=374242783 is handled. Duration 172 ms by bot id=8791251927
+2026-03-27 17:24:27,796 | core.lzt_client | ERROR | 💥 Ошибка запроса: 'NoneType' object has no attribute 'request'
+2026-03-27 17:24:28,807 | core.lzt_client | ERROR | 💥 Ошибка запроса: 'NoneType' object has no attribute 'request'
+2026-03-27 17:24:30,820 | core.lzt_client | ERROR | 💥 Ошибка запроса: 'NoneType' object has no attribute 'request'
+2026-03-27 17:24:35,175 | aiogram.event | INFO | Update id=374242784 is handled. Duration 7375 ms by bot id=8791251927
+2026-03-27 17:24:37,406 | aiogram.event | INFO | Update id=374242785 is handled. Duration 172 ms by bot id=8791251927
+2026-03-27 17:24:38,235 | aiogram.event | INFO | Update id=374242786 is handled. Duration 77 ms by bot id=8791251927
+2026-03-27 17:24:40,965 | aiogram.event | INFO | Update id=374242787 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-27 17:24:57,477 | aiogram.event | INFO | Update id=374242788 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-27 18:48:11,334 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-03-27 18:48:11,348 | aiogram.dispatcher | WARNING | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8791251927)
+2026-03-27 18:48:12,986 | aiogram.dispatcher | INFO | Connection established (tryings = 1, bot id = 8791251927)
+2026-03-27 18:48:13,810 | aiogram.event | INFO | Update id=374242789 is handled. Duration 827 ms by bot id=8791251927
+2026-03-27 19:14:28,921 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-03-27 19:14:28,934 | aiogram.dispatcher | WARNING | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8791251927)
+2026-03-27 19:14:40,569 | aiogram.dispatcher | INFO | Connection established (tryings = 1, bot id = 8791251927)
+2026-03-27 20:29:09,395 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-27 20:29:11,963 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-27 20:29:12,512 | aiogram.dispatcher | INFO | Start polling
+2026-03-27 20:29:13,124 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-27 20:29:50,072 | aiogram.event | INFO | Update id=374242791 is handled. Duration 27781 ms by bot id=8791251927
+2026-03-27 20:29:51,029 | aiogram.event | INFO | Update id=374242792 is handled. Duration 359 ms by bot id=8791251927
+2026-03-27 20:30:13,852 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:30:14,865 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:30:16,869 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:30:21,397 | aiogram.event | INFO | Update id=374242793 is handled. Duration 7547 ms by bot id=8791251927
+2026-03-27 20:42:35,150 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-27 20:42:35,934 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-27 20:42:36,107 | aiogram.dispatcher | INFO | Start polling
+2026-03-27 20:42:36,192 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-27 20:42:36,268 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:42:36,268 | aiogram.dispatcher | WARNING | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8791251927)
+2026-03-27 20:42:40,347 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:42:40,348 | aiogram.dispatcher | WARNING | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8791251927)
+2026-03-27 20:42:41,428 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:42:41,429 | aiogram.dispatcher | WARNING | Sleep for 1.308606 seconds and try again... (tryings = 1, bot id = 8791251927)
+2026-03-27 20:42:45,895 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:42:45,895 | aiogram.dispatcher | WARNING | Sleep for 1.328104 seconds and try again... (tryings = 1, bot id = 8791251927)
+2026-03-27 20:42:47,302 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:42:47,302 | aiogram.dispatcher | WARNING | Sleep for 1.813754 seconds and try again... (tryings = 2, bot id = 8791251927)
+2026-03-27 20:42:52,185 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:42:52,186 | aiogram.dispatcher | WARNING | Sleep for 1.765933 seconds and try again... (tryings = 2, bot id = 8791251927)
+2026-03-27 20:42:54,043 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:42:54,044 | aiogram.dispatcher | WARNING | Sleep for 2.251178 seconds and try again... (tryings = 3, bot id = 8791251927)
+2026-03-27 20:42:59,490 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:42:59,491 | aiogram.dispatcher | WARNING | Sleep for 2.377710 seconds and try again... (tryings = 3, bot id = 8791251927)
+2026-03-27 20:43:01,620 | aiogram.dispatcher | INFO | Connection established (tryings = 4, bot id = 8791251927)
+2026-03-27 20:43:01,826 | aiogram.event | INFO | Update id=374242794 is handled. Duration 202 ms by bot id=8791251927
+2026-03-27 20:43:02,016 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:02,017 | aiogram.dispatcher | WARNING | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8791251927)
+2026-03-27 20:43:06,102 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:06,103 | aiogram.dispatcher | WARNING | Sleep for 3.136313 seconds and try again... (tryings = 4, bot id = 8791251927)
+2026-03-27 20:43:06,299 | aiogram.dispatcher | INFO | Connection established (tryings = 1, bot id = 8791251927)
+2026-03-27 20:43:06,828 | aiogram.event | INFO | Update id=374242795 is handled. Duration 531 ms by bot id=8791251927
+2026-03-27 20:43:08,437 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:43:09,349 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:09,349 | aiogram.dispatcher | WARNING | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8791251927)
+2026-03-27 20:43:09,437 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:43:11,448 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:43:13,565 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:13,565 | aiogram.dispatcher | WARNING | Sleep for 4.134025 seconds and try again... (tryings = 5, bot id = 8791251927)
+2026-03-27 20:43:15,683 | aiogram.event | INFO | Update id=374242796 is handled. Duration 7250 ms by bot id=8791251927
+2026-03-27 20:43:17,767 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:17,768 | aiogram.dispatcher | WARNING | Sleep for 1.317792 seconds and try again... (tryings = 1, bot id = 8791251927)
+2026-03-27 20:43:18,083 | aiogram.dispatcher | INFO | Connection established (tryings = 6, bot id = 8791251927)
+2026-03-27 20:43:18,085 | aiogram.event | INFO | Update id=374242797 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-27 20:43:22,226 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:22,226 | aiogram.dispatcher | WARNING | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8791251927)
+2026-03-27 20:43:23,298 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:23,298 | aiogram.dispatcher | WARNING | Sleep for 1.818245 seconds and try again... (tryings = 2, bot id = 8791251927)
+2026-03-27 20:43:28,201 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:28,201 | aiogram.dispatcher | WARNING | Sleep for 1.315796 seconds and try again... (tryings = 1, bot id = 8791251927)
+2026-03-27 20:43:29,660 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:29,660 | aiogram.dispatcher | WARNING | Sleep for 2.368646 seconds and try again... (tryings = 3, bot id = 8791251927)
+2026-03-27 20:43:30,297 | aiogram.dispatcher | INFO | Connection established (tryings = 2, bot id = 8791251927)
+2026-03-27 20:43:30,299 | aiogram.event | INFO | Update id=374242798 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-27 20:43:31,633 | aiogram.event | INFO | Update id=374242799 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-27 20:43:32,321 | aiogram.dispatcher | INFO | Connection established (tryings = 4, bot id = 8791251927)
+2026-03-27 20:43:32,654 | aiogram.event | INFO | Update id=374242800 is handled. Duration 327 ms by bot id=8791251927
+2026-03-27 20:43:35,214 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:35,215 | aiogram.dispatcher | WARNING | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8791251927)
+2026-03-27 20:43:36,279 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:36,280 | aiogram.dispatcher | WARNING | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8791251927)
+2026-03-27 20:43:40,423 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:40,423 | aiogram.dispatcher | WARNING | Sleep for 1.206090 seconds and try again... (tryings = 1, bot id = 8791251927)
+2026-03-27 20:43:41,703 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:41,703 | aiogram.dispatcher | WARNING | Sleep for 1.387901 seconds and try again... (tryings = 1, bot id = 8791251927)
+2026-03-27 20:43:46,197 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:46,197 | aiogram.dispatcher | WARNING | Sleep for 1.546153 seconds and try again... (tryings = 2, bot id = 8791251927)
+2026-03-27 20:43:47,807 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:47,807 | aiogram.dispatcher | WARNING | Sleep for 1.910481 seconds and try again... (tryings = 2, bot id = 8791251927)
+2026-03-27 20:43:52,807 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:52,807 | aiogram.dispatcher | WARNING | Sleep for 1.779769 seconds and try again... (tryings = 3, bot id = 8791251927)
+2026-03-27 20:43:55,804 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:55,804 | aiogram.dispatcher | WARNING | Sleep for 2.415866 seconds and try again... (tryings = 3, bot id = 8791251927)
+2026-03-27 20:43:58,302 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:43:58,303 | aiogram.dispatcher | WARNING | Sleep for 2.412643 seconds and try again... (tryings = 4, bot id = 8791251927)
+2026-03-27 20:44:04,210 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-27 20:44:04,210 | aiogram.dispatcher | WARNING | Sleep for 3.051215 seconds and try again... (tryings = 4, bot id = 8791251927)
+2026-03-27 20:44:31,570 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-27 20:44:32,045 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-27 20:44:32,124 | aiogram.dispatcher | INFO | Start polling
+2026-03-27 20:44:32,252 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-27 20:44:42,353 | aiogram.event | INFO | Update id=374242801 is handled. Duration 1405 ms by bot id=8791251927
+2026-03-27 20:44:46,063 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:44:47,064 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:44:49,076 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:44:53,231 | aiogram.event | INFO | Update id=374242802 is handled. Duration 7172 ms by bot id=8791251927
+2026-03-27 20:44:57,734 | aiogram.event | INFO | Update id=374242803 is handled. Duration 77 ms by bot id=8791251927
+2026-03-27 20:45:01,025 | aiogram.event | INFO | Update id=374242804 is handled. Duration 109 ms by bot id=8791251927
+2026-03-27 20:57:12,361 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-27 20:57:12,669 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-27 20:57:12,743 | aiogram.dispatcher | INFO | Start polling
+2026-03-27 20:57:12,807 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-27 20:57:25,527 | aiogram.event | INFO | Update id=374242805 is handled. Duration 2515 ms by bot id=8791251927
+2026-03-27 20:57:31,695 | aiogram.event | INFO | Update id=374242806 is handled. Duration 312 ms by bot id=8791251927
+2026-03-27 20:57:51,432 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:57:52,440 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:57:54,451 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:57:59,458 | aiogram.event | INFO | Update id=374242807 is handled. Duration 8125 ms by bot id=8791251927
+2026-03-27 20:58:06,923 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:58:07,931 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:58:09,941 | core.lzt_client | ERROR | 💥 Error for /market/telegram: 'NoneType' object has no attribute 'request'
+2026-03-27 20:58:15,525 | aiogram.event | INFO | Update id=374242808 is handled. Duration 8890 ms by bot id=8791251927
+2026-03-28 21:14:30,772 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-28 21:14:31,433 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-28 21:14:31,520 | aiogram.dispatcher | INFO | Start polling
+2026-03-28 21:14:31,643 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-28 21:15:17,785 | aiogram.event | INFO | Update id=374242809 is handled. Duration 1125 ms by bot id=8791251927
+2026-03-28 21:15:23,532 | aiogram.event | INFO | Update id=374242810 is handled. Duration 3436 ms by bot id=8791251927
+2026-03-28 21:15:28,818 | aiogram.event | INFO | Update id=374242811 is handled. Duration 5297 ms by bot id=8791251927
+2026-03-28 21:15:34,488 | aiogram.event | INFO | Update id=374242812 is handled. Duration 2204 ms by bot id=8791251927
+2026-03-28 21:35:40,948 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-28 21:35:41,551 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-28 21:35:41,763 | aiogram.dispatcher | INFO | Start polling
+2026-03-28 21:35:42,358 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-28 21:35:49,326 | aiogram.event | INFO | Update id=374242813 is handled. Duration 483 ms by bot id=8791251927
+2026-03-28 21:35:50,903 | aiogram.event | INFO | Update id=374242814 is handled. Duration 342 ms by bot id=8791251927
+2026-03-28 21:35:55,373 | core.lzt_session | ERROR | ❌ Ошибка 404: <!DOCTYPE html>
+<html id="XenForo" lang="ru-RU" dir="LTR" class="Public NoJs Cachify LoggedIn NoSidebar Responsive userLanguage--2 userStyle--0  Market">
+<head>
+	
+
+	<meta name="format-detection" conte
+2026-03-28 21:35:55,719 | aiogram.event | INFO | Update id=374242815 is handled. Duration 3188 ms by bot id=8791251927
+2026-03-28 21:36:00,263 | core.lzt_session | ERROR | ❌ Ошибка 404: <!DOCTYPE html>
+<html id="XenForo" lang="ru-RU" dir="LTR" class="Public NoJs Cachify LoggedIn NoSidebar Responsive userLanguage--2 userStyle--0  Market">
+<head>
+	
+
+	<meta name="format-detection" conte
+2026-03-28 21:36:00,616 | aiogram.event | INFO | Update id=374242816 is handled. Duration 2280 ms by bot id=8791251927
+2026-03-29 19:35:13,796 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-29 19:35:13,808 | core.database | INFO | ✅ База данных инициализирована
+2026-03-29 19:35:14,086 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-29 19:35:14,178 | aiogram.dispatcher | INFO | Start polling
+2026-03-29 19:35:14,258 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-29 19:35:31,618 | aiogram.event | INFO | Update id=374242817 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-29 19:35:31,619 | aiogram.event | ERROR | Cause exception while process update id=374242817 by bot id=8791251927
+TypeError: get_or_create_user() got an unexpected keyword argument 'telegram_id'
+Traceback (most recent call last):
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 320, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 164, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 58, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\fsm\middleware.py", line 43, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 189, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 181, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\handlers\start.py", line 15, in cmd_start
+    await get_or_create_user(
+          ^^^^^^^^^^^^^^^^^^^
+TypeError: get_or_create_user() got an unexpected keyword argument 'telegram_id'
+2026-03-29 19:43:36,255 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-29 19:43:38,032 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 31.00₽
+2026-03-29 19:43:38,036 | core.database | INFO | ✅ База данных инициализирована
+2026-03-29 19:43:38,497 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-29 19:43:38,720 | aiogram.dispatcher | INFO | Start polling
+2026-03-29 19:43:38,891 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-29 19:43:48,491 | aiogram.event | INFO | Update id=374242818 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-29 19:43:48,491 | aiogram.event | ERROR | Cause exception while process update id=374242818 by bot id=8791251927
+TypeError: get_or_create_user() got an unexpected keyword argument 'first_name'
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 320, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 164, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 58, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\fsm\middleware.py", line 43, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 189, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 181, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\handlers\start.py", line 15, in cmd_start
+    await get_or_create_user(
+          ^^^^^^^^^^^^^^^^^^^
+TypeError: get_or_create_user() got an unexpected keyword argument 'first_name'
+2026-03-29 19:48:49,027 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-29 19:48:49,960 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 31.00₽
+2026-03-29 19:48:49,969 | core.database | INFO | ✅ База данных инициализирована
+2026-03-29 19:48:50,184 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-29 19:48:50,278 | aiogram.dispatcher | INFO | Start polling
+2026-03-29 19:48:50,354 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-29 19:48:50,427 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:48:50,428 | aiogram.dispatcher | WARNING | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8791251927)
+2026-03-29 19:48:54,058 | aiogram.dispatcher | INFO | Connection established (tryings = 1, bot id = 8791251927)
+2026-03-29 19:48:54,059 | aiogram.event | INFO | Update id=374242819 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-29 19:48:54,059 | aiogram.event | ERROR | Cause exception while process update id=374242819 by bot id=8791251927
+TypeError: get_or_create_user() got an unexpected keyword argument 'first_name'
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 320, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 164, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 58, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\fsm\middleware.py", line 43, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 189, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 181, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\handlers\start.py", line 15, in cmd_start
+    await get_or_create_user(
+          ^^^^^^^^^^^^^^^^^^^
+TypeError: get_or_create_user() got an unexpected keyword argument 'first_name'
+2026-03-29 19:48:54,517 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:48:54,517 | aiogram.dispatcher | WARNING | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8791251927)
+2026-03-29 19:48:55,610 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:48:55,610 | aiogram.dispatcher | WARNING | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8791251927)
+2026-03-29 19:48:59,755 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:48:59,756 | aiogram.dispatcher | WARNING | Sleep for 1.426971 seconds and try again... (tryings = 1, bot id = 8791251927)
+2026-03-29 19:49:01,277 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:01,277 | aiogram.dispatcher | WARNING | Sleep for 1.364885 seconds and try again... (tryings = 1, bot id = 8791251927)
+2026-03-29 19:49:05,778 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:05,779 | aiogram.dispatcher | WARNING | Sleep for 1.814136 seconds and try again... (tryings = 2, bot id = 8791251927)
+2026-03-29 19:49:07,669 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:07,670 | aiogram.dispatcher | WARNING | Sleep for 1.845014 seconds and try again... (tryings = 2, bot id = 8791251927)
+2026-03-29 19:49:12,603 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:12,603 | aiogram.dispatcher | WARNING | Sleep for 2.268191 seconds and try again... (tryings = 3, bot id = 8791251927)
+2026-03-29 19:49:14,995 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:14,995 | aiogram.dispatcher | WARNING | Sleep for 2.088687 seconds and try again... (tryings = 3, bot id = 8791251927)
+2026-03-29 19:49:20,168 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:20,169 | aiogram.dispatcher | WARNING | Sleep for 2.823440 seconds and try again... (tryings = 4, bot id = 8791251927)
+2026-03-29 19:49:23,190 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:23,190 | aiogram.dispatcher | WARNING | Sleep for 2.825599 seconds and try again... (tryings = 4, bot id = 8791251927)
+2026-03-29 19:49:26,103 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:26,103 | aiogram.dispatcher | WARNING | Sleep for 3.755978 seconds and try again... (tryings = 5, bot id = 8791251927)
+2026-03-29 19:49:29,936 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:29,936 | aiogram.dispatcher | WARNING | Sleep for 3.665902 seconds and try again... (tryings = 5, bot id = 8791251927)
+2026-03-29 19:49:33,747 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:33,747 | aiogram.dispatcher | WARNING | Sleep for 4.814457 seconds and try again... (tryings = 6, bot id = 8791251927)
+2026-03-29 19:49:38,634 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:38,634 | aiogram.dispatcher | WARNING | Sleep for 4.747717 seconds and try again... (tryings = 6, bot id = 8791251927)
+2026-03-29 19:49:43,483 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:43,483 | aiogram.dispatcher | WARNING | Sleep for 5.004875 seconds and try again... (tryings = 7, bot id = 8791251927)
+2026-03-29 19:49:48,565 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:48,565 | aiogram.dispatcher | WARNING | Sleep for 4.959324 seconds and try again... (tryings = 7, bot id = 8791251927)
+2026-03-29 19:49:53,607 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:53,608 | aiogram.dispatcher | WARNING | Sleep for 4.859349 seconds and try again... (tryings = 8, bot id = 8791251927)
+2026-03-29 19:49:58,546 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:49:58,546 | aiogram.dispatcher | WARNING | Sleep for 4.981718 seconds and try again... (tryings = 8, bot id = 8791251927)
+2026-03-29 19:50:03,603 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:50:03,603 | aiogram.dispatcher | WARNING | Sleep for 5.069515 seconds and try again... (tryings = 9, bot id = 8791251927)
+2026-03-29 19:50:08,741 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:50:08,742 | aiogram.dispatcher | WARNING | Sleep for 4.997852 seconds and try again... (tryings = 9, bot id = 8791251927)
+2026-03-29 19:50:13,830 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:50:13,830 | aiogram.dispatcher | WARNING | Sleep for 4.896811 seconds and try again... (tryings = 10, bot id = 8791251927)
+2026-03-29 19:50:18,868 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:50:18,868 | aiogram.dispatcher | WARNING | Sleep for 4.919379 seconds and try again... (tryings = 10, bot id = 8791251927)
+2026-03-29 19:50:23,865 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:50:23,865 | aiogram.dispatcher | WARNING | Sleep for 5.002650 seconds and try again... (tryings = 11, bot id = 8791251927)
+2026-03-29 19:50:28,939 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-29 19:50:28,939 | aiogram.dispatcher | WARNING | Sleep for 5.152437 seconds and try again... (tryings = 11, bot id = 8791251927)
+2026-03-29 19:51:10,231 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-29 19:51:12,865 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 31.00₽
+2026-03-29 19:51:12,870 | core.database | INFO | ✅ База данных инициализирована
+2026-03-29 19:51:13,629 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-29 19:51:14,019 | aiogram.dispatcher | INFO | Start polling
+2026-03-29 19:51:14,385 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-29 19:51:20,705 | aiogram.event | INFO | Update id=374242820 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-29 19:51:20,705 | aiogram.event | ERROR | Cause exception while process update id=374242820 by bot id=8791251927
+TypeError: get_or_create_user() missing 1 required positional argument: 'session'
+Traceback (most recent call last):
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 320, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 164, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 58, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\fsm\middleware.py", line 43, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 189, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 181, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\handlers\start.py", line 15, in cmd_start
+    await get_or_create_user(
+          ^^^^^^^^^^^^^^^^^^^
+TypeError: get_or_create_user() missing 1 required positional argument: 'session'
+2026-03-29 19:51:37,571 | aiogram.event | INFO | Update id=374242821 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-29 19:53:51,330 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-29 19:53:53,290 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 31.00₽
+2026-03-29 19:53:53,294 | core.database | INFO | ✅ База данных инициализирована
+2026-03-29 19:53:54,184 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-29 19:53:54,479 | aiogram.dispatcher | INFO | Start polling
+2026-03-29 19:53:54,763 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-29 19:53:58,205 | aiogram.event | INFO | Update id=374242822 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-29 19:53:58,205 | aiogram.event | ERROR | Cause exception while process update id=374242822 by bot id=8791251927
+TypeError: 'async_generator' object does not support the asynchronous context manager protocol
+Traceback (most recent call last):
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 320, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 164, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 58, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\fsm\middleware.py", line 43, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 189, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 181, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\handlers\start.py", line 16, in cmd_start
+    async with get_db() as session:
+TypeError: 'async_generator' object does not support the asynchronous context manager protocol
+2026-03-29 20:00:03,950 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-29 20:00:05,002 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 31.00₽
+2026-03-29 20:00:05,006 | core.database | INFO | ✅ База данных инициализирована
+2026-03-29 20:00:05,428 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-29 20:00:05,591 | aiogram.dispatcher | INFO | Start polling
+2026-03-29 20:00:05,711 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-29 20:00:09,589 | aiogram.event | INFO | Update id=374242823 is not handled. Duration 0 ms by bot id=8791251927
+2026-03-29 20:00:09,590 | aiogram.event | ERROR | Cause exception while process update id=374242823 by bot id=8791251927
+TypeError: 'async_generator' object does not support the asynchronous context manager protocol
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 320, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 164, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 58, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\fsm\middleware.py", line 43, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 189, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\router.py", line 181, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\handlers\start.py", line 16, in cmd_start
+    async with get_db() as session:
+TypeError: 'async_generator' object does not support the asynchronous context manager protocol
+2026-03-29 20:04:12,537 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-29 20:04:13,239 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 31.00₽
+2026-03-29 20:04:13,244 | core.database | INFO | ✅ База данных инициализирована
+2026-03-29 20:04:13,523 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-29 20:04:13,596 | aiogram.dispatcher | INFO | Start polling
+2026-03-29 20:04:13,659 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-29 20:04:32,955 | aiogram.event | INFO | Update id=374242824 is not handled. Duration 15 ms by bot id=8791251927
+2026-03-29 20:04:32,956 | aiogram.event | ERROR | Cause exception while process update id=374242824 by bot id=8791251927
+OperationalError: (sqlite3.OperationalError) no such column: users.lzt_user_id
+[SQL: SELECT users.id, users.username, users.lzt_user_id, users.lzt_username, users.balance, users.created_at 
+FROM users 
+WHERE users.id = ?]
+[parameters: (1527409964,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 182, in execute
+    self._adapt_connection._handle_exception(error)
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 342, in _handle_exception
+    raise error
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 164, in execute
+    self.await_(_cursor.execute(operation, parameters))
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiosqlite\cursor.py", line 40, in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiosqlite\cursor.py", line 32, in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiosqlite\core.py", line 160, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiosqlite\core.py", line 63, in _connection_worker_thread
+    result = function()
+             ^^^^^^^^^^
+sqlite3.OperationalError: no such column: users.lzt_user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 320, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 164, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 58, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\fsm\middleware.py", line 43, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 189, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 181, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\handlers\start.py", line 18, in cmd_start
+    await get_or_create_user(
+  File "D:\progect\Weloxx_shop_bot\core\database.py", line 79, in get_or_create_user
+    result = await session.execute(select(User).where(User.id == telegram_id))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\ext\asyncio\session.py", line 449, in execute
+    result = await greenlet_spawn(
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 201, in greenlet_spawn
+    result = context.throw(*sys.exc_info())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 182, in execute
+    self._adapt_connection._handle_exception(error)
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 342, in _handle_exception
+    raise error
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\dialects\sqlite\aiosqlite.py", line 164, in execute
+    self.await_(_cursor.execute(operation, parameters))
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiosqlite\cursor.py", line 40, in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiosqlite\cursor.py", line 32, in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiosqlite\core.py", line 160, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiosqlite\core.py", line 63, in _connection_worker_thread
+    result = function()
+             ^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: users.lzt_user_id
+[SQL: SELECT users.id, users.username, users.lzt_user_id, users.lzt_username, users.balance, users.created_at 
+FROM users 
+WHERE users.id = ?]
+[parameters: (1527409964,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-03-29 20:07:04,510 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [WinError 1236] Подключение к сети было разорвано локальной системой
+2026-03-29 20:07:04,511 | aiogram.dispatcher | WARNING | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8791251927)
+2026-03-29 20:07:15,918 | aiogram.dispatcher | INFO | Connection established (tryings = 1, bot id = 8791251927)
+2026-03-29 20:10:34,132 | aiogram.dispatcher | ERROR | Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2026-03-29 20:10:34,132 | aiogram.dispatcher | WARNING | Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 8791251927)
+2026-03-29 20:10:45,434 | aiogram.dispatcher | INFO | Connection established (tryings = 1, bot id = 8791251927)
+2026-03-29 20:18:02,638 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-29 20:18:03,514 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 31.00₽
+2026-03-29 20:18:03,531 | core.database | INFO | ✅ База данных инициализирована
+2026-03-29 20:18:06,112 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-29 20:18:06,293 | aiogram.dispatcher | INFO | Start polling
+2026-03-29 20:18:06,357 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-29 20:18:33,979 | core.database | INFO | 🆕 Новый пользователь: @pechka_5 (ID: 1527409964)
+2026-03-29 20:18:34,263 | aiogram.event | INFO | Update id=374242825 is handled. Duration 297 ms by bot id=8791251927
+2026-03-29 20:18:42,632 | aiogram.event | INFO | Update id=374242826 is handled. Duration 313 ms by bot id=8791251927
+2026-03-29 20:18:45,818 | aiogram.event | INFO | Update id=374242827 is handled. Duration 765 ms by bot id=8791251927
+2026-03-29 20:18:48,511 | aiogram.event | INFO | Update id=374242828 is handled. Duration 953 ms by bot id=8791251927
+2026-03-29 20:18:50,613 | aiogram.event | INFO | Update id=374242829 is handled. Duration 905 ms by bot id=8791251927
+2026-03-29 20:30:42,990 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-29 20:30:43,750 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 31.00₽
+2026-03-29 20:30:43,763 | core.database | INFO | ✅ База данных инициализирована
+2026-03-29 20:30:43,995 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-29 20:30:44,077 | aiogram.dispatcher | INFO | Start polling
+2026-03-29 20:30:44,141 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-29 20:30:57,573 | core.database | INFO | 🆕 Новый пользователь: @pechka_5 (ID: 1527409964)
+2026-03-29 20:30:57,864 | aiogram.event | INFO | Update id=374242830 is handled. Duration 312 ms by bot id=8791251927
+2026-03-29 20:30:59,326 | aiogram.event | INFO | Update id=374242831 is handled. Duration 233 ms by bot id=8791251927
+2026-03-29 20:31:02,379 | aiogram.event | INFO | Update id=374242832 is handled. Duration 1235 ms by bot id=8791251927
+2026-03-29 20:32:08,117 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-29 20:32:09,388 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 31.00₽
+2026-03-29 20:32:09,394 | core.database | INFO | ✅ База данных инициализирована
+2026-03-29 20:32:11,600 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-29 20:32:11,820 | aiogram.dispatcher | INFO | Start polling
+2026-03-29 20:32:11,898 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-29 20:32:19,085 | aiogram.event | INFO | Update id=374242833 is handled. Duration 281 ms by bot id=8791251927
+2026-03-29 20:32:21,100 | aiogram.event | INFO | Update id=374242834 is handled. Duration 390 ms by bot id=8791251927
+2026-03-29 20:32:23,601 | aiogram.event | INFO | Update id=374242835 is handled. Duration 1047 ms by bot id=8791251927
+2026-03-29 20:38:37,546 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-29 20:38:38,488 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 31.00₽
+2026-03-29 20:38:38,491 | core.database | INFO | ✅ База данных инициализирована
+2026-03-29 20:38:44,279 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-29 20:38:44,366 | aiogram.dispatcher | INFO | Start polling
+2026-03-29 20:38:44,442 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-29 20:38:54,648 | aiogram.event | INFO | Update id=374242836 is handled. Duration 311 ms by bot id=8791251927
+2026-03-29 20:38:56,324 | aiogram.event | INFO | Update id=374242837 is handled. Duration 297 ms by bot id=8791251927
+2026-03-29 20:38:58,341 | aiogram.event | INFO | Update id=374242838 is handled. Duration 1000 ms by bot id=8791251927
+2026-03-29 20:39:02,068 | aiogram.event | INFO | Update id=374242839 is handled. Duration 577 ms by bot id=8791251927
+2026-03-29 21:03:40,377 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-29 21:03:41,260 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 31.00₽
+2026-03-29 21:03:41,265 | core.database | INFO | ✅ База данных инициализирована
+2026-03-29 21:03:41,586 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-29 21:03:41,659 | aiogram.dispatcher | INFO | Start polling
+2026-03-29 21:03:41,739 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-29 21:04:07,255 | aiogram.event | INFO | Update id=374242840 is handled. Duration 328 ms by bot id=8791251927
+2026-03-29 21:04:08,691 | aiogram.event | INFO | Update id=374242841 is handled. Duration 343 ms by bot id=8791251927
+2026-03-29 21:04:21,239 | aiogram.event | INFO | Update id=374242842 is handled. Duration 11390 ms by bot id=8791251927
+2026-03-29 21:16:02,683 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-29 21:16:03,411 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 31.00₽
+2026-03-29 21:16:03,415 | core.database | INFO | ✅ База данных инициализирована
+2026-03-29 21:16:03,682 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-29 21:16:03,761 | aiogram.dispatcher | INFO | Start polling
+2026-03-29 21:16:03,832 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-29 21:16:08,808 | aiogram.event | INFO | Update id=374242843 is handled. Duration 406 ms by bot id=8791251927
+2026-03-29 21:16:10,325 | aiogram.event | INFO | Update id=374242844 is handled. Duration 280 ms by bot id=8791251927
+2026-03-29 21:16:12,552 | aiogram.event | INFO | Update id=374242845 is handled. Duration 1047 ms by bot id=8791251927
+2026-03-29 21:35:37,332 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-29 21:35:38,074 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 31.00₽
+2026-03-29 21:35:38,078 | core.database | INFO | ✅ База данных инициализирована
+2026-03-29 21:35:38,339 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-29 21:35:38,425 | aiogram.dispatcher | INFO | Start polling
+2026-03-29 21:35:38,496 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-29 21:35:43,620 | aiogram.event | INFO | Update id=374242846 is handled. Duration 905 ms by bot id=8791251927
+2026-03-29 21:35:45,086 | aiogram.event | INFO | Update id=374242847 is handled. Duration 281 ms by bot id=8791251927
+2026-03-29 21:35:47,714 | aiogram.event | INFO | Update id=374242848 is handled. Duration 952 ms by bot id=8791251927
+2026-03-30 19:17:27,833 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-30 19:17:28,616 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 16.00₽
+2026-03-30 19:17:28,635 | core.database | INFO | ✅ База данных инициализирована
+2026-03-30 19:17:28,908 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-30 19:17:28,981 | aiogram.dispatcher | INFO | Start polling
+2026-03-30 19:17:29,044 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-30 19:17:29,125 | core.database | INFO | 🆕 Новый пользователь: @Weloxxgarant (ID: 806060721)
+2026-03-30 19:17:29,451 | aiogram.event | INFO | Update id=374242849 is handled. Duration 343 ms by bot id=8791251927
+2026-03-30 19:18:01,814 | aiogram.event | INFO | Update id=374242850 is handled. Duration 609 ms by bot id=8791251927
+2026-03-30 19:18:08,177 | core.database | INFO | 🆕 Новый пользователь: @pechka_5 (ID: 1527409964)
+2026-03-30 19:18:08,679 | aiogram.event | INFO | Update id=374242851 is handled. Duration 515 ms by bot id=8791251927
+2026-03-30 19:18:11,065 | aiogram.event | INFO | Update id=374242852 is handled. Duration 327 ms by bot id=8791251927
+2026-03-30 19:18:13,329 | aiogram.event | INFO | Update id=374242853 is handled. Duration 922 ms by bot id=8791251927
+2026-03-30 19:18:19,722 | aiogram.event | INFO | Update id=374242854 is handled. Duration 547 ms by bot id=8791251927
+2026-03-30 19:18:27,731 | aiogram.event | INFO | Update id=374242855 is handled. Duration 203 ms by bot id=8791251927
+2026-03-30 19:18:29,392 | aiogram.event | INFO | Update id=374242856 is handled. Duration 172 ms by bot id=8791251927
+2026-03-30 19:18:32,317 | aiogram.event | INFO | Update id=374242857 is handled. Duration 77 ms by bot id=8791251927
+2026-03-30 19:18:37,698 | aiogram.event | INFO | Update id=374242858 is handled. Duration 233 ms by bot id=8791251927
+2026-03-30 19:18:40,181 | aiogram.event | INFO | Update id=374242859 is handled. Duration 500 ms by bot id=8791251927
+2026-03-30 19:18:56,239 | aiogram.event | INFO | Update id=374242860 is handled. Duration 484 ms by bot id=8791251927
+2026-03-30 19:29:10,127 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-30 19:29:11,096 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 16.00₽
+2026-03-30 19:29:11,101 | core.database | INFO | ✅ База данных инициализирована
+2026-03-30 19:29:11,442 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-30 19:29:11,608 | aiogram.dispatcher | INFO | Start polling
+2026-03-30 19:29:11,702 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-30 19:29:12,122 | aiogram.event | INFO | Update id=374242862 is handled. Duration 327 ms by bot id=8791251927
+2026-03-30 19:29:12,741 | aiogram.event | INFO | Update id=374242863 is not handled. Duration 952 ms by bot id=8791251927
+2026-03-30 19:29:12,741 | aiogram.event | ERROR | Cause exception while process update id=374242863 by bot id=8791251927
+TelegramBadRequest: Telegram server says - Bad Request: query is too old and response timeout expired or query ID is invalid
+Traceback (most recent call last):
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 320, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 164, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 58, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\fsm\middleware.py", line 43, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 189, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 181, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\handlers\start.py", line 50, in back_to_main
+    await callback.answer()
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\methods\base.py", line 82, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\client\bot.py", line 488, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\client\session\base.py", line 259, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\client\session\aiohttp.py", line 177, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\client\session\base.py", line 121, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: query is too old and response timeout expired or query ID is invalid
+2026-03-30 19:29:13,041 | aiogram.event | INFO | Update id=374242861 is not handled. Duration 1250 ms by bot id=8791251927
+2026-03-30 19:29:13,041 | aiogram.event | ERROR | Cause exception while process update id=374242861 by bot id=8791251927
+TelegramBadRequest: Telegram server says - Bad Request: query is too old and response timeout expired or query ID is invalid
+Traceback (most recent call last):
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 320, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 164, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 58, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\fsm\middleware.py", line 43, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 189, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 161, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 153, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 181, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 126, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 71, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\handlers\catalog.py", line 58, in show_account_for_country
+    await callback.answer()
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\methods\base.py", line 82, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\client\bot.py", line 488, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\client\session\base.py", line 259, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\client\session\aiohttp.py", line 177, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "D:\progect\Weloxx_shop_bot\venv\Lib\site-packages\aiogram\client\session\base.py", line 121, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: query is too old and response timeout expired or query ID is invalid
+2026-03-30 19:29:14,378 | aiogram.event | INFO | Update id=374242864 is handled. Duration 94 ms by bot id=8791251927
+2026-03-30 19:29:17,671 | aiogram.event | INFO | Update id=374242865 is handled. Duration 250 ms by bot id=8791251927
+2026-03-30 19:29:20,343 | aiogram.event | INFO | Update id=374242866 is handled. Duration 656 ms by bot id=8791251927
+2026-03-30 19:29:43,819 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-30 19:29:45,197 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 16.00₽
+2026-03-30 19:29:45,202 | core.database | INFO | ✅ База данных инициализирована
+2026-03-30 19:29:45,915 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-30 19:29:46,171 | aiogram.dispatcher | INFO | Start polling
+2026-03-30 19:29:46,460 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-30 19:29:49,774 | aiogram.event | INFO | Update id=374242868 is handled. Duration 2875 ms by bot id=8791251927
+2026-03-30 19:29:49,835 | aiogram.event | INFO | Update id=374242867 is handled. Duration 3156 ms by bot id=8791251927
+2026-03-30 19:29:51,573 | aiogram.event | INFO | Update id=374242869 is handled. Duration 968 ms by bot id=8791251927
+2026-03-30 19:29:59,913 | aiogram.event | INFO | Update id=374242870 is handled. Duration 172 ms by bot id=8791251927
+2026-03-30 19:30:01,595 | aiogram.event | INFO | Update id=374242871 is handled. Duration 313 ms by bot id=8791251927
+2026-03-30 19:30:03,177 | aiogram.event | INFO | Update id=374242872 is handled. Duration 687 ms by bot id=8791251927
+2026-03-30 19:30:04,435 | aiogram.event | INFO | Update id=374242873 is handled. Duration 327 ms by bot id=8791251927
+2026-03-30 19:30:07,868 | aiogram.event | INFO | Update id=374242874 is handled. Duration 890 ms by bot id=8791251927
+2026-03-30 19:44:41,305 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-30 19:44:42,148 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 16.00₽
+2026-03-30 19:44:42,161 | core.database | INFO | ✅ База данных инициализирована
+2026-03-30 19:44:42,478 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-30 19:44:42,567 | aiogram.dispatcher | INFO | Start polling
+2026-03-30 19:44:42,666 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-30 19:44:43,081 | handlers.start | ERROR | Ошибка проверки подписки: Telegram server says - Bad Request: chat not found
+2026-03-30 19:44:43,103 | handlers.start | ERROR | Ошибка проверки подписки: Telegram server says - Bad Request: chat not found
+2026-03-30 19:44:43,124 | handlers.start | ERROR | Ошибка проверки подписки: Telegram server says - Bad Request: chat not found
+2026-03-30 19:44:43,125 | handlers.start | ERROR | Ошибка проверки подписки: Telegram server says - Bad Request: chat not found
+2026-03-30 19:44:43,179 | aiogram.event | INFO | Update id=374242878 is handled. Duration 343 ms by bot id=8791251927
+2026-03-30 19:44:43,314 | aiogram.event | INFO | Update id=374242876 is handled. Duration 484 ms by bot id=8791251927
+2026-03-30 19:44:43,332 | aiogram.event | INFO | Update id=374242879 is handled. Duration 483 ms by bot id=8791251927
+2026-03-30 19:44:43,349 | aiogram.event | INFO | Update id=374242877 is handled. Duration 500 ms by bot id=8791251927
+2026-03-30 19:44:59,321 | handlers.start | ERROR | Ошибка проверки подписки: Telegram server says - Bad Request: chat not found
+2026-03-30 19:45:00,345 | aiogram.event | INFO | Update id=374242880 is handled. Duration 1531 ms by bot id=8791251927
+2026-03-30 19:45:03,516 | handlers.start | ERROR | Ошибка проверки подписки: Telegram server says - Bad Request: chat not found
+2026-03-30 19:45:03,608 | aiogram.event | INFO | Update id=374242881 is handled. Duration 187 ms by bot id=8791251927
+2026-03-30 19:45:16,418 | handlers.start | ERROR | Ошибка проверки подписки: Telegram server says - Bad Request: chat not found
+2026-03-30 19:45:16,652 | aiogram.event | INFO | Update id=374242882 is handled. Duration 436 ms by bot id=8791251927
+2026-03-30 19:45:25,469 | handlers.start | ERROR | Ошибка проверки подписки: Telegram server says - Bad Request: chat not found
+2026-03-30 19:45:25,633 | aiogram.event | INFO | Update id=374242883 is handled. Duration 266 ms by bot id=8791251927
+2026-03-30 19:45:29,426 | handlers.start | ERROR | Ошибка проверки подписки: Telegram server says - Bad Request: chat not found
+2026-03-30 19:45:29,567 | aiogram.event | INFO | Update id=374242884 is handled. Duration 234 ms by bot id=8791251927
+2026-03-30 19:45:32,637 | handlers.start | ERROR | Ошибка проверки подписки: Telegram server says - Bad Request: chat not found
+2026-03-30 19:45:32,733 | aiogram.event | INFO | Update id=374242885 is handled. Duration 234 ms by bot id=8791251927
+2026-03-30 19:45:54,982 | handlers.start | ERROR | Ошибка проверки подписки: Telegram server says - Bad Request: chat not found
+2026-03-30 19:45:55,117 | aiogram.event | INFO | Update id=374242886 is handled. Duration 233 ms by bot id=8791251927
+2026-03-30 19:45:57,224 | handlers.start | ERROR | Ошибка проверки подписки: Telegram server says - Bad Request: chat not found
+2026-03-30 19:45:57,334 | aiogram.event | INFO | Update id=374242887 is handled. Duration 186 ms by bot id=8791251927
+2026-03-30 20:36:34,019 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-30 20:36:36,022 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 16.00₽
+2026-03-30 20:36:36,028 | core.database | INFO | ✅ База данных инициализирована
+2026-03-30 20:36:39,646 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-30 20:36:40,625 | aiogram.dispatcher | INFO | Start polling
+2026-03-30 20:36:41,223 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-30 20:36:44,416 | core.database | INFO | 🆕 Новый пользователь: @Weloxxgarant (ID: 806060721)
+2026-03-30 20:36:45,373 | aiogram.event | INFO | Update id=374242888 is handled. Duration 3094 ms by bot id=8791251927
+2026-03-30 20:36:51,383 | core.database | INFO | 🆕 Новый пользователь: @pechka_5 (ID: 1527409964)
+2026-03-30 20:36:51,526 | aiogram.event | INFO | Update id=374242889 is handled. Duration 296 ms by bot id=8791251927
+2026-03-30 20:36:54,934 | aiogram.event | INFO | Update id=374242890 is handled. Duration 375 ms by bot id=8791251927
+2026-03-30 20:37:32,397 | aiogram.event | INFO | Update id=374242891 is handled. Duration 296 ms by bot id=8791251927
+2026-03-30 20:37:39,849 | core.database | INFO | 🆕 Новый пользователь: @Zxc_Killya_28 (ID: 6187253305)
+2026-03-30 20:37:39,967 | aiogram.event | INFO | Update id=374242892 is handled. Duration 327 ms by bot id=8791251927
+2026-03-30 20:37:55,070 | aiogram.event | INFO | Update id=374242893 is handled. Duration 640 ms by bot id=8791251927
+2026-03-30 20:38:05,204 | aiogram.event | INFO | Update id=374242894 is handled. Duration 1000 ms by bot id=8791251927
+2026-03-30 20:38:08,198 | aiogram.event | INFO | Update id=374242895 is handled. Duration 202 ms by bot id=8791251927
+2026-03-30 20:39:09,686 | aiogram.event | INFO | Update id=374242896 is handled. Duration 250 ms by bot id=8791251927
+2026-03-30 20:39:12,192 | aiogram.event | INFO | Update id=374242897 is handled. Duration 312 ms by bot id=8791251927
+2026-03-30 20:40:31,115 | __main__ | INFO | 🔄 Запуск polling...
+2026-03-30 20:40:31,886 | __main__ | INFO | ✅ LZT API: Weloxx | Баланс: 16.00₽
+2026-03-30 20:40:31,892 | core.database | INFO | ✅ База данных инициализирована
+2026-03-30 20:40:32,147 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-03-30 20:40:32,219 | aiogram.dispatcher | INFO | Start polling
+2026-03-30 20:40:32,305 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
+2026-03-30 20:41:12,387 | aiogram.event | INFO | Update id=374242898 is handled. Duration 1453 ms by bot id=8791251927
+2026-03-30 20:41:17,162 | aiogram.event | INFO | Update id=374242899 is handled. Duration 530 ms by bot id=8791251927
+2026-04-07 20:11:18,359 | __main__ | INFO | 🔄 Запуск polling...
+2026-04-07 20:11:19,062 | __main__ | INFO | ✅ LZT API: unknown | Баланс: 0₽
+2026-04-07 20:11:19,074 | core.database | INFO | ✅ База данных инициализирована
+2026-04-07 20:11:19,371 | __main__ | INFO | ✅ Бот запущен: @weloxx_shop_bot
+2026-04-07 20:11:19,466 | aiogram.dispatcher | INFO | Start polling
+2026-04-07 20:11:19,545 | aiogram.dispatcher | INFO | Run polling for bot @weloxx_shop_bot id=8791251927 - 'Weloxx shop'
