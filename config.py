@@ -45,6 +45,39 @@ BOT_NAME = os.getenv("BOT_NAME", "Weloxx Shop")
 CURRENCY = os.getenv("CURRENCY", "RUB")
 SUPPORT_LINK = os.getenv("SUPPORT_LINK", "https://t.me/weloxx_support")
 
+# ==================== СПИСОК СТРАН (TELEGRAM ACCOUNTS) ====================
+# Формат: code (код страны), name (название), flag (флаг), price (цена в ₽), prefix (телефонный код)
+TELEGRAM_ACCOUNTS = [
+    {"code": "US", "name": "США", "flag": "🇺🇸", "price": 40, "prefix": "+1"},
+    {"code": "MM", "name": "Мьянма", "flag": "🇲🇲", "price": 40, "prefix": "+95"},
+    {"code": "IN", "name": "Индия", "flag": "🇮🇳", "price": 45, "prefix": "+91"},
+    {"code": "CO", "name": "Колумбия", "flag": "🇨🇴", "price": 45, "prefix": "+57"},
+    {"code": "KE", "name": "Кения", "flag": "🇰🇪", "price": 45, "prefix": "+254"},
+    {"code": "CA", "name": "Канада", "flag": "🇨🇦", "price": 50, "prefix": "+1"},
+    {"code": "ID", "name": "Индонезия", "flag": "🇮🇩", "price": 50, "prefix": "+62"},
+    {"code": "BD", "name": "Бангладеш", "flag": "🇧🇩", "price": 50, "prefix": "+880"},
+    {"code": "EG", "name": "Египет", "flag": "🇪🇬", "price": 55, "prefix": "+20"},
+    {"code": "AR", "name": "Аргентина", "flag": "🇦🇷", "price": 65, "prefix": "+54"},
+    {"code": "VN", "name": "Вьетнам", "flag": "🇻🇳", "price": 70, "prefix": "+84"},
+    {"code": "GB", "name": "Великобритания", "flag": "🇬🇧", "price": 80, "prefix": "+44"},
+    {"code": "AF", "name": "Афганистан", "flag": "🇦🇫", "price": 80, "prefix": "+93"},
+    {"code": "BR", "name": "Бразилия", "flag": "🇧🇷", "price": 85, "prefix": "+55"},
+    {"code": "EC", "name": "Эквадор", "flag": "🇪🇨", "price": 85, "prefix": "+593"},
+    {"code": "PH", "name": "Филиппины", "flag": "🇵🇭", "price": 90, "prefix": "+63"},
+    {"code": "UZ", "name": "Узбекистан", "flag": "🇺🇿", "price": 90, "prefix": "+998"},
+    {"code": "TH", "name": "Таиланд", "flag": "🇹🇭", "price": 100, "prefix": "+66"},
+    {"code": "DZ", "name": "Алжир", "flag": "🇩🇿", "price": 100, "prefix": "+213"},
+    {"code": "YE", "name": "Йемен", "flag": "🇾🇪", "price": 120, "prefix": "+967"},
+    {"code": "MX", "name": "Мексика", "flag": "🇲🇽", "price": 120, "prefix": "+52"},
+    {"code": "ES", "name": "Испания", "flag": "🇪🇸", "price": 130, "prefix": "+34"},
+    {"code": "VE", "name": "Венесуэла", "flag": "🇻🇪", "price": 140, "prefix": "+58"},
+    {"code": "MY", "name": "Малайзия", "flag": "🇲🇾", "price": 140, "prefix": "+60"},
+    {"code": "PE", "name": "Перу", "flag": "🇵🇪", "price": 140, "prefix": "+51"},
+    {"code": "KZ", "name": "Казахстан", "flag": "🇰🇿", "price": 150, "prefix": "+7"},
+    {"code": "FR", "name": "Франция", "flag": "🇫🇷", "price": 170, "prefix": "+33"},
+    {"code": "UA", "name": "Украина", "flag": "🇺🇦", "price": 180, "prefix": "+380"},
+]
+
 # ==================== ПРОВЕРКА КОНФИГУРАЦИИ ====================
 def validate_config():
     """Проверяет наличие обязательных переменных"""
