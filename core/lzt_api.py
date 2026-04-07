@@ -29,11 +29,11 @@ class LZTClient:  # ✅ Имя как в оригинале
             logger.error(f"Ошибка проверки LZT API: {e}")
             return {"success": False, "username": "unknown", "balance": 0}
 
-    def get_telegram_accounts(self, limit: int = 20, page: int = 1, search: str = None):
+    def get_telegram_accounts(self, limit: int = 20, page: int = 1, search_query: str = None):
         try:
             params = {"limit": limit, "page": page}
-            if search:
-                params["title"] = search
+            if search_query:
+                params["title"] = search_query
 
             url = f"{self.base_url}/telegram"  # ✅ Без /market/
             resp = self.session.get(url, params=params, timeout=API_TIMEOUT)
@@ -42,6 +42,17 @@ class LZTClient:  # ✅ Имя как в оригинале
         except Exception as e:
             logger.error(f"Ошибка получения аккаунтов: {e}")
             return {"items": [], "total": 0}
+
+    def buy_item(self, item_id: int) -> dict:
+        """Купить аккаунт на lzt.market"""
+        try:
+            url = f"{self.base_url}/telegram/{item_id}/buy"
+            resp = self.session.post(url, timeout=API_TIMEOUT)
+            resp.raise_for_status()
+            return resp.json()
+        except Exception as e:
+            logger.error(f"Ошибка покупки аккаунта {item_id}: {e}")
+            return {"errors": [str(e)]}
 
     def get_account_info(self, item_id: int):
         try:
@@ -56,3 +67,4 @@ class LZTClient:  # ✅ Имя как в оригинале
     # 🔗 Совместимость со старым кодом хендлеров
     get_items = get_telegram_accounts
     get_item_info = get_account_info
+    buy_item = buy_item

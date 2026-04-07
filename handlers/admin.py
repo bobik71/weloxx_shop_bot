@@ -1,7 +1,7 @@
+# handlers/admin.py
 from aiogram import Router, F, types, Bot
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
-from core.database import add_account
 import config
 
 router = Router()
@@ -67,14 +67,16 @@ async def set_pass(msg: types.Message, state: FSMContext):
 async def finish_add(msg: types.Message, state: FSMContext, bot: Bot):
     data = await state.get_data()
     desc = msg.text.strip() if msg.text != "пропустить" else ""
-    await add_account(
-        lzt_id=0, category=data["category"], title=data["title"],
-        price=data["price"], login=data["login"], password=data["password"],
-        description=desc, guaranteed=True, guarantee_h=24
-    )
     await state.clear()
-    await msg.answer(f"✅ Аккаунт '{data['title']}' добавлен!")
+    await msg.answer(
+        f"ℹ️ Функция добавления аккаунтов через бота временно отключена.\n\n"
+        f"✅ Аккаунт '{data['title']}' будет добавлен вручную администратором.",
+        parse_mode="HTML"
+    )
     # Уведомить админов
     for aid in config.ADMIN_IDS:
-        try: await bot.send_message(aid, f"📦 Новый аккаунт: {data['title']}")
-        except: pass
+        if aid:
+            try:
+                await bot.send_message(aid, f"📦 Запрос на добавление аккаунта: {data['title']}")
+            except:
+                pass
