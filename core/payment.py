@@ -27,23 +27,36 @@ class CryptoBotPayment:
                 "Content-Type": "application/json"
             }
     
-    async def create_invoice(self, amount: float, description: str, payload: str) -> dict:
-        """Создать счёт на оплату"""
+    async def create_invoice(self, amount: float, description: str, payload: str, ttl: int = None) -> dict:
+        """Создать счёт на оплату
+        
+        Args:
+            amount: Сумма в RUB
+            description: Описание платежа
+            payload: Данные платежа (до 4000 символов)
+            ttl: Время жизни счёта в секундах (опционально)
+        """
         if not self.enabled:
             raise RuntimeError("CryptoBot не настроен (CRYPTOBOT_TOKEN не задан в .env)")
+        
+        json_data = {
+            "amount": amount,
+            "asset": "RUB",
+            "description": description,
+            "payload": payload,
+            "allow_comments": False,
+            "allow_anonymous": False
+        }
+        
+        # Добавляем TTL если указан
+        if ttl is not None:
+            json_data["ttl"] = ttl
         
         async with aiohttp.ClientSession() as session:
             async with session.post(
                 f"{self.base_url}/createInvoice",
                 headers=self.headers,
-                json={
-                    "amount": amount,
-                    "asset": "RUB",
-                    "description": description,
-                    "payload": payload,
-                    "allow_comments": False,
-                    "allow_anonymous": False
-                }
+                json=json_data
             ) as resp:
                 if resp.status != 200:
                     error_text = await resp.text()
