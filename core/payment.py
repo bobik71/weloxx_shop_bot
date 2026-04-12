@@ -45,7 +45,20 @@ class CryptoBotPayment:
                     "allow_anonymous": False
                 }
             ) as resp:
-                return await resp.json()
+                if resp.status != 200:
+                    error_text = await resp.text()
+                    logger.error(f"CryptoBot API error: HTTP {resp.status} - {error_text}")
+                    raise RuntimeError(f"CryptoBot API вернул ошибку: HTTP {resp.status}")
+                
+                data = await resp.json()
+                
+                if not data.get("ok"):
+                    error_code = data.get("error", {}).get("code", "unknown")
+                    error_msg = data.get("error", {}).get("message", "Неизвестная ошибка")
+                    logger.error(f"CryptoBot invoice creation failed: {error_code} - {error_msg}")
+                    raise RuntimeError(f"Ошибка CryptoBot: {error_msg}")
+                
+                return data
     
     async def check_invoice(self, invoice_id: int) -> str:
         """Проверить статус счёта"""
