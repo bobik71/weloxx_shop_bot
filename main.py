@@ -16,12 +16,14 @@ logging.basicConfig(
 async def main():
     # Настройка сессии с увеличенными таймаутами и принудительным использованием IPv4
     # family=2 (AF_INET) — только IPv4, чтобы избежать проблем с DNS при IPv6
-    connector = TCPConnector(family=2)
+    connector = TCPConnector(family=2, limit=100, keepalive_timeout=30)
     timeout = ClientTimeout(total=30, connect=10, sock_read=10)
     
-    # Создаём aiohttp.ClientSession вручную и передаём в AiohttpSession
-    aiohttp_session = ClientSession(connector=connector, timeout=timeout)
-    session = AiohttpSession(aiohttp_session)
+    # Создаём AiohttpSession с параметрами для внутреннего ClientSession
+    session = AiohttpSession(
+        timeout=timeout,
+        connector=connector
+    )
     
     bot = Bot(token=BOT_TOKEN, session=session)
     dp = Dispatcher()
