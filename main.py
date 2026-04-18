@@ -2,7 +2,7 @@ import asyncio
 import logging
 from aiogram import Bot, Dispatcher
 from aiogram.client.session.aiohttp import AiohttpSession
-from aiohttp import ClientTimeout
+from aiohttp import ClientTimeout, TCPConnector
 from config import BOT_TOKEN
 from core.lzt_api import LZTClient  # ✅ Исправлено на LZTClient
 from core.database import init_db
@@ -14,9 +14,11 @@ logging.basicConfig(
 )
 
 async def main():
-    # Настройка сессии с увеличенными таймаутами и кастомным DNS
+    # Настройка сессии с увеличенными таймаутами и принудительным использованием IPv4
+    # family=2 (AF_INET) — только IPv4, чтобы избежать проблем с DNS при IPv6
+    connector = TCPConnector(family=2)
     timeout = ClientTimeout(total=30, connect=10, sock_read=10)
-    session = AiohttpSession(timeout=timeout)
+    session = AiohttpSession(timeout=timeout, connector=connector)
     
     bot = Bot(token=BOT_TOKEN, session=session)
     dp = Dispatcher()
