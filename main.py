@@ -19,11 +19,14 @@ async def main():
     connector = TCPConnector(family=2, limit=100, keepalive_timeout=30)
     timeout = ClientTimeout(total=30, connect=10, sock_read=10)
     
-    # Создаём AiohttpSession с параметрами для внутреннего ClientSession
-    session = AiohttpSession(
-        timeout=timeout,
-        connector=connector
+    # Создаём собственный ClientSession с нужными параметрами
+    aiohttp_session = ClientSession(
+        connector=connector,
+        timeout=timeout
     )
+    
+    # Передаём готовую сессию в AiohttpSession
+    session = AiohttpSession(session=aiohttp_session)
     
     bot = Bot(token=BOT_TOKEN, session=session)
     dp = Dispatcher()
@@ -47,13 +50,13 @@ async def main():
     except Exception as e:
         logging.error(f"❌ Ошибка подключения к Telegram: {type(e).__name__}: {e}")
         logging.error("Проверьте ваше интернет-соединение и настройки DNS")
-        await bot.session.close()
+        await session.close()
         return
 
     try:
         await dp.start_polling(bot)
     finally:
-        await bot.session.close()
+        await session.close()
 
 if __name__ == "__main__":
     asyncio.run(main())
