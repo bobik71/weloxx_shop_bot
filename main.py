@@ -1,6 +1,8 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
+from aiogram.client.session.aiohttp import AiohttpSession
+from aiohttp import ClientTimeout
 from config import BOT_TOKEN
 from core.lzt_api import LZTClient  # ✅ Исправлено на LZTClient
 from core.database import init_db
@@ -12,7 +14,11 @@ logging.basicConfig(
 )
 
 async def main():
-    bot = Bot(token=BOT_TOKEN)
+    # Настройка сессии с увеличенными таймаутами и кастомным DNS
+    timeout = ClientTimeout(total=30, connect=10, sock_read=10)
+    session = AiohttpSession(timeout=timeout)
+    
+    bot = Bot(token=BOT_TOKEN, session=session)
     dp = Dispatcher()
     dp.include_router(router)
 
@@ -26,7 +32,16 @@ async def main():
 
     await init_db()
     logging.info("✅ База данных инициализирована")
-    logging.info(f"✅ Бот запущен: @{(await bot.get_me()).username}")
+    
+    # Проверка подключения к Telegram с обработкой ошибок
+    try:
+        me = await bot.get_me()
+        logging.info(f"✅ Бот запущен: @{me.username}")
+    except Exception as e:
+        logging.error(f"❌ Ошибка подключения к Telegram: {type(e).__name__}: {e}")
+        logging.error("Проверьте ваше интернет-соединение и настройки DNS")
+        await bot.session.close()
+        return
 
     try:
         await dp.start_polling(bot)
