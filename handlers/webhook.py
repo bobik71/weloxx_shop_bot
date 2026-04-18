@@ -1,5 +1,6 @@
 # handlers/webhook.py — Обработчик вебхуков CryptoBot
-from aiogram import Router, types
+# Примечание: Этот файл теперь содержит только логику обработки, 
+# сам вебхук нужно поднимать через отдельный aiohttp сервер
 from core.payment import CryptoBotPayment
 from core.database import get_db, update_order_status
 from sqlalchemy import select
@@ -9,33 +10,15 @@ from utils.logger import get_logger
 
 logger = get_logger(__name__)
 
-router = Router()
 payment = CryptoBotPayment()
 
-@router.post('/webhook/cryptobot')
-async def cryptobot_webhook(request: types.Request):
+async def process_cryptobot_webhook(data: dict):
     """
-    Обработчик вебхуков от CryptoBot
-    Настраивается в панели CryptoBot: Settings → Webhooks → Webhook URL
+    Логика обработки вебхука от CryptoBot
+    Вызывается из отдельного HTTP-сервера
     """
     if not payment.enabled:
         logger.warning("⚠️ Вебхук получен, но CryptoBot не настроен")
-        return {"status": "error"}
-    
-    # Получаем тело запроса и заголовок подписи
-    body = await request.body()
-    signature = request.headers.get('Crypto-Bot-API-Signature', '')
-    
-    # Проверяем подпись
-    if not payment.verify_webhook(body.decode(), signature):
-        logger.warning(f"❌ Неверная подпись вебхука: {signature}")
-        return {"status": "error"}
-    
-    # Парсим данные
-    try:
-        data = await request.json()
-    except Exception as e:
-        logger.error(f"❌ Ошибка парсинга JSON вебхука: {e}")
         return {"status": "error"}
     
     invoice_id = data.get('invoice_id')
