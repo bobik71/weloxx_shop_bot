@@ -27,7 +27,6 @@ async def process_cryptobot_webhook(data: dict):
     if not payment.enabled:
         logger.warning("⚠️ Вебхук получен, но CryptoBot не настроен")
         return {"status": "error"}
-
     invoice_id = data.get('invoice_id')
     status = data.get('status')
     payload = data.get('payload', '')

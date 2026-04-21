@@ -1,14 +1,7 @@
-# main.py — САМЫЙ-САМЫЙ ВЕРХ ФАЙЛА
-import sys, asyncio
-if sys.platform == "win32":
-    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
-# Конец фикса. Дальше — ваши импорты.
-
-import logging
-import os
-# ... и так далее
-
-# ==================== НАЧАЛО ФАЙЛА — КРИТИЧЕСКИЙ ФИКС ДЛЯ WINDOWS ====================
+# main.py — Полностью переписан для стабильной работы на Windows
+# ==============================================================================
+# ⚠️ ВАЖНО: Эти 4 строки ДОЛЖНЫ быть САМЫМИ ПЕРВЫМИ в файле.
+# Они исправляют сетевой стек asyncio/aiohttp на Windows.
 import sys
 import asyncio
 
@@ -25,13 +18,10 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.session.aiohttp import AiohttpSession
 from aiogram.fsm.storage.memory import MemoryStorage
 
+# Загружаем .env ДО чтения переменных
 load_dotenv()
 
-from config import BOT_TOKEN, ADMIN_IDS, LZT_TOKEN
-from core.lzt_api import LZTClient
-from core.database import init_db
-from handlers import router
-
+# Настройка логирования
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(name)s | %(levelname)s | %(message)s",
@@ -45,37 +35,52 @@ Path("logs").mkdir(exist_ok=True)
 
 
 async def main():
-    # Проверка токена
-    if not BOT_TOKEN or len(BOT_TOKEN) < 30:
+    # 1. Читаем токен напрямую (чтобы config.py не крашил бот при отсутствии .env)
+    bot_token = os.getenv("BOT_TOKEN", "").strip()
+    if not bot_token or len(bot_token) < 30:
         logger.error("❌ BOT_TOKEN не задан или некорректен в .env")
         return
 
-    # Простая сессия — aiohttp сам настроит соединение
+    # 2. Создаём сессию и бота (БЕЗ kwargs — так работает стабильно в aiogram 3.x)
     session = AiohttpSession()
-    bot = Bot(token=BOT_TOKEN, session=session)
+    bot = Bot(token=bot_token, session=session)
     dp = Dispatcher(storage=MemoryStorage())
-    
-    # Подключение роутеров
-    dp.include_router(router)
-    logger.info("✅ Роутеры подключены")
 
-    # Проверка LZT API (не блокирует запуск)
-    if LZT_TOKEN:
+    # 3. Безопасное подключение роутеров
+    try:
+        from handlers import router as main_router
+        dp.include_router(main_router)
+        logger.info("✅ Роутеры подключены")
+    except ImportError as e:
+        logger.error(f"❌ Ошибка импорта роутеров: {e}")
+    except Exception as e:
+        logger.warning(f"⚠️ Роутеры не подключены: {type(e).__name__}")
+
+    # 4. Проверка LZT API (не блокирует запуск)
+    lzt_token = os.getenv("LZT_TOKEN", "").strip()
+    if lzt_token:
         try:
+            from core.lzt_api import LZTClient
             lzt = LZTClient()
             status = lzt.check_connection()
-            if status["success"]:
-                logger.info(f"✅ LZT API: {status['username']} | Баланс: {status['balance']}₽")
+            if status.get("success"):
+                logger.info(f"✅ LZT API: {status.get('username')} | Баланс: {status.get('balance')}₽")
             else:
-                logger.warning("⚠️ LZT API: не удалось подключиться. Проверьте токен.")
+                logger.warning("⚠️ LZT API недоступен. Проверьте токен.")
         except Exception as e:
-            logger.warning(f"⚠️ LZT API ошибка: {e}")
+            logger.warning(f"⚠️ LZT API проверка пропущена: {e}")
+    else:
+        logger.warning("⚠️ LZT_TOKEN не задан — функции маркета отключены")
 
-    # Инициализация БД
-    await init_db()
-    logger.info("✅ База данных инициализирована")
+    # 5. Инициализация БД
+    try:
+        from core.database import init_db
+        await init_db()
+        logger.info("✅ База данных инициализирована")
+    except Exception as e:
+        logger.error(f"❌ Ошибка инициализации БД: {e}")
 
-    # Тест подключения к Telegram
+    # 6. Тест подключения к Telegram
     try:
         me = await bot.get_me()
         logger.info(f"✅ Бот запущен: @{me.username} (ID: {me.id})")
@@ -84,21 +89,21 @@ async def main():
         await bot.session.close()
         return
 
-    # Запуск polling
-    logger.info("🔄 Запуск polling...")
+    # 7. Запуск polling
+    logger.info("🔄 Запуск long polling...")
     try:
         await dp.start_polling(bot)
     except KeyboardInterrupt:
         logger.info("🛑 Остановка по Ctrl+C")
     finally:
         await bot.session.close()
-        logger.info("🔚 Сессии закрыты")
+        logger.info("🔚 Сессия закрыта. Бот остановлен.")
 
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        logger.info("🛑 Прервано пользователем")
+        print("\n🛑 Прервано пользователем")
     except Exception as e:
         logger.critical(f"💥 Критическая ошибка: {type(e).__name__}: {e}", exc_info=True)
