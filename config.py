@@ -1,52 +1,65 @@
 # config.py — Центральная конфигурация бота Weloxx Shop
 import os
+import logging
 from dotenv import load_dotenv
 
 # Загружаем .env из корня проекта
 load_dotenv()
 
+logger = logging.getLogger(__name__)
+
 # ==================== TELEGRAM ====================
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+BOT_TOKEN = os.getenv("BOT_TOKEN", "").strip()
 if not BOT_TOKEN:
     raise ValueError("❌ BOT_TOKEN не задан в .env")
 
 # Админы: список ID через запятую (например: "123456789,987654321")
-ADMIN_IDS_RAW = os.getenv("ADMIN_IDS", "")
-ADMIN_IDS = set(int(x.strip()) for x in ADMIN_IDS_RAW.split(",") if x.strip().isdigit()) if ADMIN_IDS_RAW else set()
+ADMIN_IDS_RAW = os.getenv("ADMIN_IDS", "").strip()
+ADMIN_IDS = {
+    int(x.strip()) for x in ADMIN_IDS_RAW.split(",") 
+    if x.strip().isdigit()
+} if ADMIN_IDS_RAW else set()
+
+if not ADMIN_IDS:
+    logger.warning("⚠️ ADMIN_IDS не задан — админ-команды будут недоступны")
 
 # ==================== ОБЯЗАТЕЛЬНАЯ ПОДПИСКА ====================
-# CHANNEL_ID — для API-запросов (get_chat_member). Может быть @username или числовой ID
-CHANNEL_ID = os.getenv("CHANNEL_ID", "@weloxxsale")
-
-# REQUIRED_CHANNEL — для отображения в интерфейсе (всегда с @)
-REQUIRED_CHANNEL = os.getenv("REQUIRED_CHANNEL", "@weloxxsale")
+CHANNEL_ID = os.getenv("CHANNEL_ID", "@weloxxsale").strip()
+REQUIRED_CHANNEL = os.getenv("REQUIRED_CHANNEL", CHANNEL_ID).strip()
 
 # ==================== LZT MARKET API ====================
-LZT_TOKEN = os.getenv("LZT_TOKEN")
+LZT_TOKEN = os.getenv("LZT_TOKEN", "").strip()
 if not LZT_TOKEN:
     raise ValueError("❌ LZT_TOKEN не задан в .env")
 
-LZT_BASE_URL = "https://prod-api.lzt.market"  # ✅ Рабочий эндпоинт
-API_TIMEOUT = int(os.getenv("API_TIMEOUT", "15"))
-REQUEST_DELAY = float(os.getenv("REQUEST_DELAY", "1.5"))
+LZT_BASE_URL = "https://prod-api.lzt.market"
+try:
+    API_TIMEOUT = int(os.getenv("API_TIMEOUT", "15"))
+except ValueError:
+    API_TIMEOUT = 15
+    logger.warning("⚠️ API_TIMEOUT некорректен, используется 15")
+
+try:
+    REQUEST_DELAY = float(os.getenv("REQUEST_DELAY", "1.5"))
+except ValueError:
+    REQUEST_DELAY = 1.5
 
 # ==================== CRYPTOBOT (опционально) ====================
-CRYPTOBOT_TOKEN = os.getenv("CRYPTOBOT_TOKEN")
+CRYPTOBOT_TOKEN = os.getenv("CRYPTOBOT_TOKEN", "").strip()
 
 # ==================== БАЗА ДАННЫХ ====================
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///data/shop.db")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///data/shop.db").strip()
 
 # ==================== ЛОГИРОВАНИЕ ====================
-LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
-LOG_FILE = os.getenv("LOG_FILE", "logs/bot.log")
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").strip().upper()
+LOG_FILE = os.getenv("LOG_FILE", "logs/bot.log").strip()
 
 # ==================== НАСТРОЙКИ БОТА ====================
-BOT_NAME = os.getenv("BOT_NAME", "Weloxx Shop")
-CURRENCY = os.getenv("CURRENCY", "RUB")
-SUPPORT_LINK = os.getenv("SUPPORT_LINK", "https://t.me/weloxx_support")
+BOT_NAME = os.getenv("BOT_NAME", "Weloxx Shop").strip()
+CURRENCY = os.getenv("CURRENCY", "RUB").strip().upper()
+SUPPORT_LINK = os.getenv("SUPPORT_LINK", "https://t.me/weloxx_support").strip()
 
-# ==================== СПИСОК СТРАН (TELEGRAM ACCOUNTS) ====================
-# Формат: code (код страны), name (название), flag (флаг), price (цена в ₽), prefix (телефонный код)
+# ==================== СПИСОК СТРАН ====================
 TELEGRAM_ACCOUNTS = [
     {"code": "US", "name": "США", "flag": "🇺🇸", "price": 40, "prefix": "+1"},
     {"code": "MM", "name": "Мьянма", "flag": "🇲🇲", "price": 40, "prefix": "+95"},
@@ -77,20 +90,3 @@ TELEGRAM_ACCOUNTS = [
     {"code": "FR", "name": "Франция", "flag": "🇫🇷", "price": 170, "prefix": "+33"},
     {"code": "UA", "name": "Украина", "flag": "🇺🇦", "price": 180, "prefix": "+380"},
 ]
-
-# ==================== ПРОВЕРКА КОНФИГУРАЦИИ ====================
-def validate_config():
-    """Проверяет наличие обязательных переменных"""
-    required = ["BOT_TOKEN", "LZT_TOKEN"]
-    missing = [var for var in required if not os.getenv(var)]
-    if missing:
-        raise ValueError(f"❌ Отсутствуют обязательные переменные в .env: {', '.join(missing)}")
-    
-    # Предупреждение, если нет админов
-    if not ADMIN_IDS:
-        print("⚠️ ADMIN_IDS не задан — админ-команды будут недоступны")
-    
-    return True
-
-# Запускаем проверку при импорте
-validate_config()
