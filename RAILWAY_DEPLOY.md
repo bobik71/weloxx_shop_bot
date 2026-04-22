@@ -33,18 +33,24 @@
 В панели Railway перейдите в **Variables** и добавьте:
 
 ```bash
-# Обязательные
+# ===== ОБЯЗАТЕЛЬНЫЕ =====
 BOT_TOKEN=your_telegram_bot_token
 LZT_TOKEN=your_lzt_market_api_token
 ADMIN_IDS=123456789,987654321
 
-# Опциональные
+# ===== ОПЦИОНАЛЬНЫЕ =====
 CHANNEL_ID=@your_channel
-CRYPTOBOT_TOKEN=your_cryptobot_token
+CRYPTOBOT_TOKEN=your_cryptobot_token_here
+CRYPTOBOT_TESTNET=false
 API_TIMEOUT=15
 LOG_LEVEL=INFO
 DATABASE_URL=sqlite:///data/shop.db
 ```
+
+> ⚠️ **ВАЖНО для CryptoBot:** Ошибка HTTP 401 означает неверный токен. 
+> 1. Получите токен в CryptoBot: https://crypt.bot/app/crypto_bot → Настройки → Разработчикам → Создать токен
+> 2. Убедитесь, что скопировали токен без лишних пробелов
+> 3. Проверьте, что используете правильный токен (не от тестовой сети, если CRYPTOBOT_TESTNET=false)
 
 ### Шаг 3: Запуск
 
@@ -101,6 +107,8 @@ LOG_LEVEL=DEBUG
 | Ошибка "ModuleNotFoundError" | Убедитесь что все зависимости в `requirements.txt` |
 | База данных не сохраняется | Создайте Volume для `/workspace/data` |
 | Таймауты API LZT | Увеличьте `API_TIMEOUT` до 30 |
+| **CryptoBot HTTP 401** | Проверьте `CRYPTOBOT_TOKEN`: нет ли пробелов, правильный ли токен, соответствует ли тестовой сети (`CRYPTOBOT_TESTNET`) |
+| CryptoBot счёт не создаётся | Включите `LOG_LEVEL=DEBUG` и проверьте логи в панели Railway |
 
 ---
 

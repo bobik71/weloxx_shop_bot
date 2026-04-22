@@ -9,7 +9,7 @@ logger = get_logger(__name__)
 
 class CryptoBotPayment:
     def __init__(self):
-        self.token = config.CRYPTOBOT_TOKEN
+        self.token = config.CRYPTOBOT_TOKEN.strip() if config.CRYPTOBOT_TOKEN else ""
         self.testnet = getattr(config, 'CRYPTOBOT_TESTNET', False)
         
         # ✅ Проверка: если токен пустой — не падаем, а предупреждаем
@@ -21,11 +21,13 @@ class CryptoBotPayment:
         else:
             self.enabled = True
             logger.info("✅ CryptoBot платежи включены")
+            logger.info(f"🔑 Токен установлен (длина: {len(self.token)} симв.)")
             self.base_url = "https://testnet.pay.crypt.bot/api" if self.testnet else "https://pay.crypt.bot/api"
             self.headers = {
                 "Crypto-Bot-API-Secret": self.token,
                 "Content-Type": "application/json"
             }
+            logger.debug(f"Base URL: {self.base_url}")
     
     async def create_invoice(self, amount: float, description: str, payload: str, ttl: int = None) -> dict:
         """Создать счёт на оплату
@@ -58,6 +60,20 @@ class CryptoBotPayment:
                 headers=self.headers,
                 json=json_data
             ) as resp:
+                # Логируем запрос для отладки
+                logger.debug(f"Запрос к CryptoBot: POST {self.base_url}/createInvoice")
+                logger.debug(f>Status: {resp.status}")
+                
+                if resp.status == 401:
+                    error_text = await resp.text()
+                    logger.error(f"❌ Ошибка авторизации (HTTP 401): {error_text}")
+                    logger.error("Проверьте CRYPTOBOT_TOKEN в переменных окружения Railway")
+                    logger.error(f"Длина токена: {len(self.token)} симв.")
+                    raise RuntimeError(
+                        "CryptoBot API вернул ошибку: HTTP 401 (Неверный токен). "
+                        "Проверьте значение CRYPTOBOT_TOKEN в настройках Railway."
+                    )
+                
                 if resp.status != 200:
                     error_text = await resp.text()
                     logger.error(f"CryptoBot API error: HTTP {resp.status} - {error_text}")
@@ -71,6 +87,7 @@ class CryptoBotPayment:
                     logger.error(f"CryptoBot invoice creation failed: {error_code} - {error_msg}")
                     raise RuntimeError(f"Ошибка CryptoBot: {error_msg}")
                 
+                logger.info(f"✅ Счёт создан успешно: {data.get('result', {}).get('invoice_id', 'N/A')}")
                 return data
     
     async def check_invoice(self, invoice_id: int) -> str:
