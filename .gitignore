@@ -1,49 +1,73 @@
-```
-# Python
+# Dependencies
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+*.pyc
+*.pyo
+*.pyd
+*.py~
 
-# Environment
-.env
-.env.local
-.env.*
+# Virtual environments
+.venv/
+venv/
+env/
 
 # Logs
 *.log
 
-# Testing
+# Environment variables
+.env
+.env.local
+.env.*
+
+# Coverage reports
 .coverage
 coverage/
 htmlcov/
-.nox/
-.tox/
 
-# IDE
+# MyPy cache
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pytest cache
+.pytest_cache/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE specific
 .vscode/
 .idea/
 *.swp
 *.swo
-*.tmp
 
-# OS
+# OS generated files
 .DS_Store
 Thumbs.db
-```
+.directory
+*.sublime-workspace
+
+# Compressed files
+*.zip
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.gz
+*.tgz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.zst
+*.lz4
+*.lzh
+*.cab
+*.arj
+*.rpm
+*.deb
+*.Z
+*.lz
+*.lzo
