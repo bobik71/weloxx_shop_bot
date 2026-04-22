@@ -10,8 +10,9 @@ logger = logging.getLogger(__name__)
 
 # ==================== TELEGRAM ====================
 BOT_TOKEN = os.getenv("BOT_TOKEN", "").strip()
+# Не вызываем ошибку сразу - пусть бот сам проверит токен при запуске
 if not BOT_TOKEN:
-    raise ValueError("❌ BOT_TOKEN не задан в .env")
+    logger.warning("⚠️ BOT_TOKEN не задан в .env")
 
 # Админы: список ID через запятую (например: "123456789,987654321")
 ADMIN_IDS_RAW = os.getenv("ADMIN_IDS", "").strip()
@@ -30,7 +31,7 @@ REQUIRED_CHANNEL = os.getenv("REQUIRED_CHANNEL", CHANNEL_ID).strip()
 # ==================== LZT MARKET API ====================
 LZT_TOKEN = os.getenv("LZT_TOKEN", "").strip()
 if not LZT_TOKEN:
-    raise ValueError("❌ LZT_TOKEN не задан в .env")
+    logger.warning("⚠️ LZT_TOKEN не задан в .env")
 
 LZT_BASE_URL = "https://prod-api.lzt.market"
 try:

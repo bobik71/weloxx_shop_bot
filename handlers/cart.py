@@ -138,7 +138,7 @@ async def check_payment(callback: types.CallbackQuery, state: FSMContext):
     
     # Попытка купить через API
     try:
-        buy_result = lzt.buy_item(item_id)
+        buy_result = lzt.buy_account(item_id, price)
     except Exception as e:
         await callback.message.edit_text(f"❌ Ошибка покупки: {e}")
         return

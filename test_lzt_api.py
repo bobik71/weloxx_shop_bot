@@ -14,24 +14,22 @@ if not config.LZT_TOKEN:
     sys.exit(1)
 
 print(f"✅ LZT_TOKEN найден (длина: {len(config.LZT_TOKEN)})")
-print(f"📡 API Base: {config.MARKET_API_BASE}")
+print(f"📡 API Base: {config.LZT_BASE_URL}")
 print()
 
 # Создаём клиент
 lzt = LZTClient()
 
 # Тест 1: Получение информации о пользователе
-print("1️⃣ Тест: Получение информации о пользователе (/user)")
+print("1️⃣ Тест: Проверка подключения (/me)")
 try:
-    user_data = lzt.get_me()
-    if user_data and 'user' in user_data:
-        user = user_data['user']
+    status = lzt.check_connection()
+    if status.get("success"):
         print(f"   ✅ Успешно!")
-        print(f"   👤 Username: @{user.get('username', 'N/A')}")
-        print(f"   💰 Баланс: {user.get('balance', '0')} ({user.get('convertedBalance', 0)} ₽)")
-        print(f"   🆔 ID: {user.get('id', 'N/A')}")
+        print(f"   👤 Username: {status.get('username', 'N/A')}")
+        print(f"   💰 Баланс: {status.get('balance', '0')} ₽")
     else:
-        print(f"   ❌ Ошибка: {user_data}")
+        print(f"   ❌ Ошибка: {status}")
 except Exception as e:
     print(f"   ❌ Исключение: {e}")
 
