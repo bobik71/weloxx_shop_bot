@@ -62,7 +62,7 @@ class CryptoBotPayment:
             ) as resp:
                 # Логируем запрос для отладки
                 logger.debug(f"Запрос к CryptoBot: POST {self.base_url}/createInvoice")
-                logger.debug(f>Status: {resp.status}")
+                logger.debug(f"Status: {resp.status}")
                 
                 if resp.status == 401:
                     error_text = await resp.text()
