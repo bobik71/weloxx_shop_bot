@@ -9,8 +9,9 @@ logger = get_logger(__name__)
 
 class CryptoBotPayment:
     def __init__(self):
-        self.token = config.CRYPTOBOT_TOKEN.strip() if config.CRYPTOBOT_TOKEN else ""
-        self.testnet = getattr(config, 'CRYPTOBOT_TESTNET', False)
+        # Получаем токен напрямую из config, где он уже очищен
+        self.token = config.CRYPTOBOT_TOKEN
+        self.testnet = config.CRYPTOBOT_TESTNET
         
         # ✅ Проверка: если токен пустой — не падаем, а предупреждаем
         if not self.token:
@@ -28,6 +29,7 @@ class CryptoBotPayment:
                 "Content-Type": "application/json"
             }
             logger.debug(f"Base URL: {self.base_url}")
+            logger.debug(f"Token prefix: {self.token[:4]}..." if len(self.token) >= 4 else f"Token: {self.token}")
     
     async def create_invoice(self, amount: float, description: str, payload: str, ttl: int = None) -> dict:
         """Создать счёт на оплату
@@ -67,11 +69,18 @@ class CryptoBotPayment:
                 if resp.status == 401:
                     error_text = await resp.text()
                     logger.error(f"❌ Ошибка авторизации (HTTP 401): {error_text}")
-                    logger.error("Проверьте CRYPTOBOT_TOKEN в переменных окружения Railway")
                     logger.error(f"Длина токена: {len(self.token)} симв.")
+                    logger.error(f"Token prefix: {self.token[:4]}...")
+                    logger.error("Возможные причины:")
+                    logger.error("1. Токен содержит скрытые символы или пробелы")
+                    logger.error("2. Токен скопирован с лишними символами")
+                    logger.error("3. Используется тестовый токен в production режиме (или наоборот)")
+                    logger.error(f"Текущий режим: {'TESTNET' if self.testnet else 'PRODUCTION'}")
+                    logger.error(f"Base URL: {self.base_url}")
                     raise RuntimeError(
                         "CryptoBot API вернул ошибку: HTTP 401 (Неверный токен). "
-                        "Проверьте значение CRYPTOBOT_TOKEN в настройках Railway."
+                        f"Проверьте значение CRYPTOBOT_TOKEN в настройках Railway. "
+                        f"Режим: {'testnet' if self.testnet else 'production'}, Base URL: {self.base_url}"
                     )
                 
                 if resp.status != 200:

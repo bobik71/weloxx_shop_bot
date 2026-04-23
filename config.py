@@ -46,7 +46,20 @@ except ValueError:
     REQUEST_DELAY = 1.5
 
 # ==================== CRYPTOBOT (опционально) ====================
-CRYPTOBOT_TOKEN = os.getenv("CRYPTOBOT_TOKEN", "").strip()
+CRYPTOBOT_TOKEN_RAW = os.getenv("CRYPTOBOT_TOKEN", "")
+# Очищаем токен от всех возможных скрытых символов
+CRYPTOBOT_TOKEN = "".join(CRYPTOBOT_TOKEN_RAW.split()) if CRYPTOBOT_TOKEN_RAW else ""
+
+# Флаг тестовой сети (по умолчанию False - используем продакшен)
+CRYPTOBOT_TESTNET = os.getenv("CRYPTOBOT_TESTNET", "false").strip().lower() in ("true", "1", "yes")
+
+if CRYPTOBOT_TOKEN:
+    logger.info(f"✅ CRYPTOBOT_TOKEN установлен (длина: {len(CRYPTOBOT_TOKEN)} симв.)")
+    # Проверяем, не содержит ли токен подозрительные символы
+    if len(CRYPTOBOT_TOKEN) < 10:
+        logger.warning("⚠️ CRYPTOBOT_TOKEN слишком короткий!")
+else:
+    logger.warning("⚠️ CRYPTOBOT_TOKEN не задан в .env")
 
 # ==================== БАЗА ДАННЫХ ====================
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///data/shop.db").strip()
